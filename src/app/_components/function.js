@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "@/lib/axios"
 const updateData = async (id, setloader, setUpdated, formData) => {
     try {
         setloader(true)
@@ -17,7 +17,7 @@ const DeleteProduct = async (id, setloader, setDeletd) => {
     try {
         setloader(true)
         await axios
-            .delete(`http://localhost:8000/api/product/${id}`)
+            .delete(`/api/product/${id}`)
             .then(() => {
                 setloader(false)
                 setDeletd(true)
