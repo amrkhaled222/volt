@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { opensans } from '@/font'
 import correctIcon from '@/app/_assets/correct.png'
 import removeIcon from '@/app/_assets/remove.png'
-export default function AcceptedImage({ image, title }) {
+export default function AcceptedImage({ image, title, removeFile }) {
     return (
         <>
             <li
