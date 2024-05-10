@@ -1,0 +1,14 @@
+{
+	"orderId": "5445",
+	"shiping": "express",
+	"payment method": "paypal",
+	"status": "pennding",
+	"price": 2000,
+	"discount": 30,
+	"requstedDate": "Nov 8th,2023",
+	"deliverdDate": "Nov 12th,2023",
+	"customerName": "jhon doe",
+	"email": "dsad@gadg.com",
+	"phone": "5446466",
+	"address": "pasfpsa,sadas,asdsad"
+}

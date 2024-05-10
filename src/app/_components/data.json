@@ -1,0 +1,55 @@
+{
+	"revenue": {
+		"title": "total revenue",
+		"state": {
+			"thisMonth": {
+				"value": 200
+			},
+
+			"lastMonth": {
+				"value": 120,
+				"date": "oct-2023"
+			}
+		}
+	},
+
+	"orders": {
+		"title": "total orders",
+		"state": {
+			"thisMonth": {
+				"value": 120
+			},
+
+			"lastMonth": {
+				"value": 200,
+				"date": "oct-2023"
+			}
+		}
+	},
+	"customers": {
+		"title": "number of customer",
+		"state": {
+			"thisMonth": {
+				"value": 120
+			},
+
+			"lastMonth": {
+				"value": 200,
+				"date": "oct-2023"
+			}
+		}
+	},
+	"visitor": {
+		"title": "number of visits",
+		"state": {
+			"thisMonth": {
+				"value": 120
+			},
+
+			"lastMonth": {
+				"value": 200,
+				"date": "oct-2023"
+			}
+		}
+	}
+}
