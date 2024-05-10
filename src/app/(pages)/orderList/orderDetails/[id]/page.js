@@ -1,6 +1,6 @@
 'use client'
 import orderData from '@/app/_components/orderData.json'
-import { opensans } from '@/app/font'
+import { opensans } from '@/font'
 import Image from 'next/image'
 import calendarIcon from '@/app/_assets/calendar.png'
 import Button from '@/app/_components/StyledButton'

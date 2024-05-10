@@ -2,27 +2,30 @@ import Image from 'next/image'
 import { opensans } from '@/font'
 import correctIcon from '@/app/_assets/correct.png'
 import removeIcon from '@/app/_assets/remove.png'
-export default function AcceptedImage({ image, title, removeFile }) {
+export default function AcceptedImage({
+    picture,
+    removeFile,
+    title = 'product image',
+}) {
     return (
         <>
             <li
                 className={`relative rounded-md p-4  bg-[#FAFAFA] font-semibold justify-between items-center  flex gap-1 ${opensans.className} hover:scale-95 duration-300 `}>
                 <div className="flex gap-2">
                     <Image
-                        loader={image => image}
                         width={30}
                         height={30}
-                        src={image}
-                        alt={title}
+                        src={picture?.preview ? picture.preview : picture}
+                        alt={picture?.name ? picture.name : title}
                         // onLoad={() => {
-                        // 	URL.revokeObjectURL(file.preview);
+                        // 	URL.revokeObjectURL(ImagePreview.preview);
                         // }}
-                        className="h-12 w-12 rounded-md"
+                        className=" max-w-[30px] max-h-[30px] h-full rounded-md"
                     />
                 </div>
                 <div className="max-w-[50%]">
                     <p className=" text-ellipsis max-w-full break-words	">
-                        {title}
+                        {picture?.name ? picture.name : title}
                     </p>
                 </div>
                 <div className="flex gap-1 ">

@@ -1,13 +1,24 @@
-import axios from "@/lib/axios"
+import axios from '@/lib/axios'
+
+const sendData = async (setDataSent, formData) => {
+    try {
+        await axios.post(`api/product/`, formData).then(res => {
+            if (res.status) {
+                setDataSent(true)
+            }
+        })
+    } catch (err) {
+        throw new Error(err)
+    }
+}
+
 const updateData = async (id, setloader, setUpdated, formData) => {
     try {
         setloader(true)
-        await axios
-            .put(`http://localhost:8000/api/product/${id}`, formData)
-            .then(() => {
-                setloader(false)
-                setUpdated(true)
-            })
+        await axios.put(`/api/product/${id}`, formData).then(() => {
+            setloader(false)
+            setUpdated(true)
+        })
     } catch (err) {
         throw new Error(err)
     }
@@ -16,12 +27,10 @@ const updateData = async (id, setloader, setUpdated, formData) => {
 const DeleteProduct = async (id, setloader, setDeletd) => {
     try {
         setloader(true)
-        await axios
-            .delete(`/api/product/${id}`)
-            .then(() => {
-                setloader(false)
-                setDeletd(true)
-            })
+        await axios.delete(`/api/product/${id}`).then(() => {
+            setloader(false)
+            setDeletd(true)
+        })
     } catch (err) {
         throw new Error(err)
     }
@@ -45,4 +54,4 @@ const validateForm = formData => {
     return { state: true, problem: '' }
 }
 
-export { updateData, DeleteProduct, validateForm }
+export { updateData, DeleteProduct, validateForm, sendData }

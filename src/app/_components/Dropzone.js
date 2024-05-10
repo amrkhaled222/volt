@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { opensans } from '@/font'
-function Dropzone({ setFiles, setRejected, filesLen, setUploadExceed }) {
+function Dropzone({ setFiles, setRejected, setUploadExceed }) {
     // const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     //     if (acceptedFiles?.length) {
     //         setFiles(previousFiles => {
@@ -36,8 +36,8 @@ function Dropzone({ setFiles, setRejected, filesLen, setUploadExceed }) {
                 } else {
                     return {
                         ...formdata,
-                        [picture]: Object.assign(acceptedFiles[0], {
-                            preview: URL.createObjectURL(file),
+                        picture: Object.assign(acceptedFiles[0], {
+                            preview: URL.createObjectURL(acceptedFiles[0]),
                         }),
                     }
                 }

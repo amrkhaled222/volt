@@ -1,19 +1,14 @@
 import Image from 'next/image'
-export default function ImagePreview({ picture, title }) {
+export default function ImagePreview({ picture, title = 'product Image' }) {
     return (
         <>
             {picture != '' && (
                 <div className="flex gap-2 min-h-[380px] rounded-lg justify-center items-center p-3 ">
-                    {console.log(picture)}
                     <Image
-                        loader={picture => picture}
                         width={30}
                         height={30}
-                        src={picture}
-                        alt={title}
-                        // onLoad={() => {
-                        // 	URL.revokeObjectURL(ImagePreview.preview);
-                        // }}
+                        src={picture?.preview ? picture.preview : picture}
+                        alt={picture?.name ? picture.name : title}
                         className=" w-full h-full rounded-md"
                     />
                 </div>

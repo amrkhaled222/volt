@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { opensans, rubik } from '@/font'
-import productImg from '../_assets/productDesign.png'
 import dolar from '../_assets/dolar.png'
 import Link from 'next/link'
 
@@ -12,13 +11,18 @@ function Product(props) {
             <div className="flex gap-3">
                 <Image
                     className="w-22 h-22"
-                    src={productImg}
+                    width={84}
+                    height={84}
+                    src={props.picture}
                     alt="productImage"></Image>
                 <div className=" flex flex-col justify-between">
                     <div className="flex flex-col gap-1">
                         <h2 className={` capitalize`}>{props.title}</h2>
                         <span className=" text-seconderyItemColor text-sm">
-                            {props.type}
+                            {props.category_id == '1' && 'casual'}
+                            {props.category_id == '2' && 'party'}
+                            {props.category_id == '3' && 'formal'}
+                            {props.category_id == '4' && 'sport'}
                         </span>
                     </div>
                     <div
@@ -26,6 +30,8 @@ function Product(props) {
                         <Image
                             className="w-3 h-3"
                             src={dolar}
+                            width={12}
+                            height={12}
                             alt="dolar sign"></Image>
                         {props.price}
                     </div>
@@ -33,19 +39,7 @@ function Product(props) {
             </div>
             <div>
                 <h3 className=" font-semibold"> summary</h3>
-                <p className=" text-seconderyItemColor">{props.summary}</p>
-            </div>
-            <div className="border border-seconderyItemColor flex flex-col gap-2 p-3 rounded-lg">
-                <div className="flex  justify-between relative after:block after:w-full after:h-[0.5px] after:bg-seconderyItemColor after:absolute  after:bottom-[-2px]  after:left-0    ">
-                    {' '}
-                    <span>sales</span> <span>{props.sales}</span>
-                </div>
-
-                <div className="flex justify-between">
-                    {' '}
-                    <span>remaining products</span>{' '}
-                    <span>{props.remainingProducts}</span>
-                </div>
+                <p className=" text-seconderyItemColor">{props.description}</p>
             </div>
         </Link>
     )

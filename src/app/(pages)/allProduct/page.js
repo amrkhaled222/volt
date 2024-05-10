@@ -1,48 +1,58 @@
 'use client'
 import Product from '@/app/_components/product'
-import ProductData from '@/app/_components/product.json'
-
-import Pagination from '@/app/_components/Pagination'
 import { useEffect, useState } from 'react'
-import { products } from '@/app/_components/client/products'
 import ReactPaginate from 'react-paginate'
+import Loader from '@/app/_components/Loader'
+import axios from '@/lib/axios'
 
 export default function AllProduct() {
-    const [product, setProduct] = useState(0)
+    const [product, setProduct] = useState({})
+    const [loader, setLoader] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
-    const [recordsPerPage] = useState(12)
-    const indexOfLastRecord = currentPage * recordsPerPage
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
-    const currentRecords = ProductData.slice(
-        indexOfFirstRecord,
-        indexOfLastRecord,
-    )
 
-    const nPages = Math.ceil(ProductData.length / recordsPerPage)
+    const getAllProduct = async () => {
+        try {
+            await axios.get(`api/product/?page=${currentPage}`).then(res => {
+                setProduct(res.data.products)
+                setLoader(false)
+            })
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
 
     useEffect(() => {
-        const data = fetch('http://localhost:8000/api/product')
-            .then(res => {
-                return res.json()
-            })
-            .then(product => {
-                setProduct(product)
-            })
-    })
+        getAllProduct()
+    }, [currentPage])
 
     return (
         <div className="p-4 flex flex-col gap-4">
-            <div className="grid md:grid-cols-autoFlow grid-cols-autoFlowMobile gap-4 justify-evenly">
-                {Object.keys(currentRecords).map((e, i) => {
-                    return (
-                        <Product {...currentRecords[e]} key={i + 1}></Product>
-                    )
-                })}
-            </div>
-            <Pagination
-                nPages={nPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}></Pagination>
+            {loader ? (
+                <Loader></Loader>
+            ) : (
+                <div>
+                    <div className="grid md:grid-cols-autoFlow grid-cols-autoFlowMobile grid-rows-allproduct_row gap-4 justify-evenly min-h-[80vh]">
+                        {product.data.map((e, i) => {
+                            return <Product {...e} key={e.id}></Product>
+                        })}
+
+                        <ReactPaginate
+                            previousLabel="Previous"
+                            nextLabel="Next"
+                            pageCount={product.last_page}
+                            onPageChange={e => {
+                                setCurrentPage(e.selected + 1)
+                            }}
+                            breakLabel="..."
+                            containerClassName="flex justify-between items-center max-w-[400px]"
+                            previousLinkClassName="border p-2 rounded-md"
+                            nextLinkClassName="border py-2 px-4 rounded-md"
+                            activeClassName="bg-black text-white"
+                            pageClassName="px-2 py-1 rounded-md border "
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

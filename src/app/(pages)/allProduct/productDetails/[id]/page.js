@@ -5,13 +5,9 @@ import { useEffect, useState } from 'react'
 import RejectedImage from '@/app/_components/RejectedImage'
 import AcceptedImage from '@/app/_components/AcceptedImage'
 import ImagePreview from '@/app/_components/ImagePreview'
-import Image from 'next/image'
-import removeIcon from '@/app/_assets/remove.png'
 import StyledButton from '@/app/_components/StyledButton'
-import PopUpWithFunc from '@/app/_components/PopUpWithFunc'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
-import { useAuth } from '@/hooks/auth'
+import removeIcon from '@/app/_assets/remove.png'
 import Loader from '@/app/_components/Loader'
 import {
     DeleteProduct,
@@ -19,15 +15,15 @@ import {
     validateForm,
 } from '@/app/_components/function'
 import PopUp from '@/app/_components/PopUp'
+import axios from '@/lib/axios'
+import Image from 'next/image'
 function ProductDetails(props) {
-    const user = useAuth()
-    console.log(user)
+    let router = useRouter()
 
     //state
     const [rejected, setRejected] = useState([])
     const [loader, setloader] = useState(false)
-    const [buttonLoader, setButtonloader] = useState(true)
-
+    const [query, setquery] = useState('')
     //validate form and show propiate massege
     const [formValidate, setFormValidate] = useState({
         state: true,
@@ -52,38 +48,24 @@ function ProductDetails(props) {
         picture: '',
     })
 
-    //function send data to api
+    const redirectUser = () => {
+        router.push('/allProduct')
+    }
 
-    //fetch product data
-
-    useEffect(() => {
+    const getProductData = async () => {
         setloader(true)
-        const ProductData = fetch(
-            `http://localhost:8000/api/product/${props.params.id}`,
-        )
-            .then(res => res.json())
-            .then(formData => {
-                setFormData(() => {
-                    setloader(false)
-                    return formData.product
-                })
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+        try {
+            await axios.get(`api/product/${props.params.id}`).then(res => {
+                setFormData(res.data.product)
 
-    useEffect(() => {
-        if (deletd == true) {
-            setTimeout(() => {
-                router.push('/allProduct')
-            }, 3000)
+                setloader(false)
+            })
+        } catch (err) {
+            throw new Error(err)
         }
-    }, [deletd])
+    }
 
     //remove uploaded Image
-
-    useEffect(() => {})
 
     const removeImage = () => {
         setFormData(e => {
@@ -108,19 +90,12 @@ function ProductDetails(props) {
 
     //use router for cancel button
 
-    let router = useRouter()
-    const handleClickingCancle = () => {
-        router.push('/allProduct')
-    }
-
     //form validation and send data
     const UpdateButton = e => {
         e.preventDefault()
-
         setFormValidate(validateForm(formData))
-
         if (formValidate.state) {
-            updateData(props.params.id, setloader, setUpdated, formData)
+            setquery('update')
         }
     }
 
@@ -128,41 +103,77 @@ function ProductDetails(props) {
 
     const handleDelteButton = e => {
         e.preventDefault()
-        DeleteProduct(props.params.id, setloader, setDeletd)
+        setquery('delete')
     }
+
+    useEffect(() => {
+        getProductData()
+    }, [])
+
+    useEffect(() => {
+        if (query == 'delete') {
+            DeleteProduct(props.params.id, setloader, setDeletd)
+        }
+
+        if (query == 'update') {
+            updateData(props.params.id, setloader, setUpdated, formData)
+        }
+    }, [query])
+
+    //redirect user after update or delete
+    useEffect(() => {
+        if (deletd == true || updated == true) {
+            setTimeout(() => {
+                redirectUser()
+            }, 3000)
+        }
+    }, [deletd, updated])
 
     return (
         <div className=" p-4 container m-auto">
             <div className="bg-white  flex  rounded-xl flex-col lg:flex-row min-h-[80vh]">
-                {/* pop up when upload more than one image */}
-
                 {deletd && <PopUp text={'product Deleted successfully'} />}
                 {updated && <PopUp text={'product Updated successfully'} />}
                 {loader && <Loader></Loader>}
+                {/* pop up when upload more than one image */}
+                {uploadExceed && (
+                    <div
+                        className={` w-full h-full bg-overlay absolute top-50 z-10 left-0 top-0 flex justify-center items-center`}>
+                        <div className="flex w-[300px] lg:w-1/3 md:1/2   h-30 text-center p-16 relative  rounded-lg bg-white font-semibold  ">
+                            oops!! max one image
+                            <button
+                                onClick={() => {
+                                    setUploadExceed(false)
+                                }}
+                                className="w-8 h-8 absolute -right-3 -top-3 z-20">
+                                <Image src={removeIcon}></Image>
+                            </button>
+                        </div>
+                    </div>
+                )}
                 {/* pop up when form invalid */}
-                {/* {!formValidate.state && (
-                    <PopUpWithFunc
-                        text={` please add ${formValidate.problem}`}
-                        clickFunc={console.log('')}
-                    />
-                )} */}
-                {/* {setFormValidate({
-                            state: true,
-                            problem: '',
-                        }) */}
-                {/* setUploadExceed(false) */}
-
-                {/* {!uploadExceed.state && (
-                    <PopUpWithFunc
-                        text={`oops!! max one image`}
-                        clickFunc={console.log('')}
-                    />
-                )} */}
+                {!formValidate.state && (
+                    <div
+                        className={` w-full h-full bg-overlay absolute top-50 z-10 left-0 top-0 flex justify-center items-center`}>
+                        <div className="flex w-[300px] lg:w-1/3 md:1/2   h-30 text-center p-16 relative  rounded-lg bg-white font-semibold  ">
+                            please add ${formValidate.problem}
+                            <button
+                                onClick={() => {
+                                    setFormValidate({
+                                        state: true,
+                                        problem: '',
+                                    })
+                                }}
+                                className="w-8 h-8 absolute -right-3 -top-3 z-20">
+                                <Image src={removeIcon}></Image>
+                            </button>
+                        </div>
+                    </div>
+                )}
 
                 <Form
                     formData={formData}
                     formFunc={handleFormdata}
-                    handleClickingCancle={handleClickingCancle}
                     setfrom={setFormData}
                 />
                 <div className=" flex flex-col gap-5 lg:basis-[41%] p-4">
@@ -183,8 +194,7 @@ function ProductDetails(props) {
                     {(formData.picture != '' || rejected.length > 0) && (
                         <ul className="flex flex-col gap-3 bg-white mt-10   ">
                             <AcceptedImage
-                                image={formData.picture}
-                                title={formData.title}
+                                picture={formData.picture}
                                 removeFile={removeImage}></AcceptedImage>
                             <RejectedImage
                                 rejected={rejected}
@@ -213,7 +223,7 @@ function ProductDetails(props) {
                         </div>
                         <StyledButton
                             text={'Cancel'}
-                            handleClicking={handleClickingCancle}
+                            handleClicking={redirectUser}
                             style={
                                 'basis-[33%]  py-2 border-black '
                             }></StyledButton>

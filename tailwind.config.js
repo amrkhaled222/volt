@@ -48,6 +48,7 @@ module.exports = {
             gridTemplateRows: {
                 layout: '100px 1fr',
                 mobilelayout: '76px 1fr',
+                allproduct_row: ' repeat(auto-fill, minmax(280px, 300px)) ',
             },
             colors: {
                 border: 'hsl(var(--border))',
