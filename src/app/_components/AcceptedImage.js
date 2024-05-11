@@ -17,9 +17,6 @@ export default function AcceptedImage({
                         height={30}
                         src={picture?.preview ? picture.preview : picture}
                         alt={picture?.name ? picture.name : title}
-                        // onLoad={() => {
-                        // 	URL.revokeObjectURL(ImagePreview.preview);
-                        // }}
                         className=" max-w-[30px] max-h-[30px] h-full rounded-md"
                     />
                 </div>

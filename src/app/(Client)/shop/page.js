@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react'
 
 import { products } from '@/app/_components/client/products'
 
-function CategoryPage() {
+function CategoryPage(props) {
     const [page, setPage] = useState(0)
     const [filterData, setFilterData] = useState()
     const n = 9
@@ -20,9 +20,7 @@ function CategoryPage() {
     useEffect(() => {
         setFilterData(
             products.filter((item, index) => {
-                console.log(page * n, index < (page + 1) * n, index)
                 if (index >= page * n && index < (page + 1) * n) {
-                    console.log('true')
                 }
                 return index >= page * n && index < (page + 1) * n
             }),

@@ -37,6 +37,7 @@ module.exports = {
                 mobileParty: "url('./_assets/mobile-party.png')",
                 gym: "url('./_assets/gym.png')",
                 mobileGym: "url('./_assets/mobile-gym.png')",
+                search: "url('./_assets/magnifying-glass.png')",
             },
             gridTemplateColumns: {
                 // added new 4 column grid as new4

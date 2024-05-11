@@ -1,6 +1,7 @@
-import Button from '../StyledButton'
-import CartProduct from './CartProduct'
-import cloth from '../../assets/cloth.svg'
+import Button from '@/app/_components/client/Button'
+import CartProduct from '@/app/_components/client/CartProduct'
+import cloth from '@/app/_assets/cloth.svg'
+
 function Cart() {
     let subTotal
 
