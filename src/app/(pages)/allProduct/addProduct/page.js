@@ -45,6 +45,13 @@ function ProductDetails(props) {
         })
     }
 
+    const takepic=(inputPic)=>{
+        setFormData((e)=>{
+            return {...e,
+                    picture:inputPic}
+        })
+    }
+
     // remove rejected Image
     const removeRejected = name => {
         setRejected(files => files.filter(({ file }) => file.name !== name))
@@ -143,22 +150,9 @@ function ProductDetails(props) {
                         {' '}
                         product gallery
                     </h2>
-                    <Dropzone
-                        setUploadExceed={setUploadExceed}
-                        setFiles={setFormData}
-                        rejected={rejected}
-                        setRejected={setRejected}
+                    <Dropzone 
+                      handleFormChange={takepic}
                     />
-                    {(formData.picture != '' || rejected.length > 0) && (
-                        <ul className="flex flex-col gap-3 bg-white mt-10   ">
-                            <AcceptedImage
-                                picture={formData.picture}
-                                removeFile={removeImage}></AcceptedImage>
-                            <RejectedImage
-                                rejected={rejected}
-                                removeRejected={removeRejected}></RejectedImage>
-                        </ul>
-                    )}
 
                     <div className="flex  justify-between flex-col md:flex-row gap-2">
                         <form

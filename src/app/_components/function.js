@@ -2,10 +2,20 @@ import axios from '@/lib/axios'
 
 const sendData = async (setDataSent, formData) => {
     try {
-        await axios.post(`api/product/`, formData).then(res => {
+        console.log(formData.picture)
+        await axios.post(`api/product/`, formData,{
+            data:formData,
+            transformRequest: [
+                    (data) => data,
+            ],
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }).then(res => {
             if (res.status) {
                 setDataSent(true)
             }
+            console.log(res)
         })
     } catch (err) {
         throw new Error(err)
