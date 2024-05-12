@@ -1,17 +1,9 @@
 import axios from '@/lib/axios'
 
-const sendData = async (setDataSent, formData) => {
+const sendData = async (setDataSent, formData, url) => {
     try {
         console.log(formData.picture)
-        await axios.post(`api/product/`, formData,{
-            data:formData,
-            transformRequest: [
-                    (data) => data,
-            ],
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }).then(res => {
+        await axios.post(url, formData).then(res => {
             if (res.status) {
                 setDataSent(true)
             }
@@ -24,6 +16,7 @@ const sendData = async (setDataSent, formData) => {
 
 const updateData = async (id, setloader, setUpdated, formData) => {
     try {
+        console.log(formData)
         setloader(true)
         await axios.put(`/api/product/${id}`, formData).then(() => {
             setloader(false)
