@@ -1,6 +1,7 @@
 'use client'
-import Button from '@/app/_components/client/Button'
+
 import { useRouter } from 'next/navigation'
+
 function Preview({ title, children, path }) {
     let router = useRouter()
     return (

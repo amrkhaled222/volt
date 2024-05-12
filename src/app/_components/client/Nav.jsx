@@ -13,7 +13,7 @@ function Nav() {
     }
     let router = useRouter()
     const SearchFunc = param => {
-        router.push(`/shop?${param}`)
+        router.push(`/shop?search=${param}`)
     }
 
     return (
@@ -115,7 +115,7 @@ function Nav() {
                 </li>
 
                 <li className=" hover:cursor-pointer hover:scale-95 hover:duration-300">
-                    <Link href="/shop?Bset_Seller=1">Best Seller</Link>{' '}
+                    <Link href="/shop?best_seller=1">Best Seller</Link>{' '}
                 </li>
             </ul>
             <form

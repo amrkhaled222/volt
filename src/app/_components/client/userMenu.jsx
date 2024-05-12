@@ -51,9 +51,9 @@ export default function UserMenu() {
                 className=" w-5 hover:cursor-pointer"></Image>
 
             <div
-                className={`w-1/2 sm:w-[230px]  absolute bg-white duration-500 ease-in-out  ${
+                className={`w-[230px] shadow-lg absolute bg-white duration-500 ease-in-out  ${
                     userMenu ? ` ${transitionin} ` : ` ${transitionout}`
-                } flex flex-col  top-10 md:top-[60px]  right-0 text-black  z-20 p-4 rounded-md text-sm w-1/2   lg:gap-4 gap-2  `}>
+                } flex flex-col  top-10 md:top-[60px]   right-0  text-black  z-20 p-4 rounded-md text-sm w-1/2   lg:gap-4 gap-2  `}>
                 {user.user && (
                     <div className=" flex flex-col  lg:gap-4 gap-2">
                         <h2 className=" font-medium capitalize p-1">

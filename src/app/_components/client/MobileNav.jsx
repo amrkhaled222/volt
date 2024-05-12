@@ -17,7 +17,7 @@ export default function MobileNav() {
     const [menu, tooglemenu] = useState(false)
 
     const SearchFunc = param => {
-        router.push(`/shop?${param}`)
+        router.push(`/shop?search=${param}`)
     }
     const stopScrolling = e => {
         if (e) {
@@ -91,22 +91,22 @@ export default function MobileNav() {
                                 <Menu.Items className="  w-full left-0   focus:outline-none">
                                     <div className="py-1 capitalize flex flex-col gap-2 ">
                                         <Menu.Item className={`shadow-sm p-1`}>
-                                            <Link href="shop?catgeory_id=1">
+                                            <Link href="shop?category_id=1">
                                                 {'casual'}
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item className={`shadow-sm p-1`}>
-                                            <Link href="shop?catgeory_id=2">
+                                            <Link href="shop?category_id=2">
                                                 formal
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item className={` shadow-sm p-1`}>
-                                            <Link href="shop?catgeory_id=3">
+                                            <Link href="shop?category_id=3">
                                                 Gym
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item className={`shadow-sm p-1`}>
-                                            <Link href="shop?catgeory_id=4">
+                                            <Link href="shop?category_id=4">
                                                 party
                                             </Link>
                                         </Menu.Item>

@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useState } from 'react'
 import { feedbacks } from './feedbacks'
 import { sliderSettings } from './sliderSettings'
+import Image from 'next/image'
 function ItemInfo({ children, ...props }) {
     const [Display, setDisplay] = useState('rating')
 
@@ -46,7 +47,7 @@ function ItemInfo({ children, ...props }) {
                         <li className=" font-plusj  text-gray-500 hover:text-black">
                             <button
                                 className={
-                                    Display === 'Details' ? listButtonClass : ''
+                                    Display === 'Details' && listButtonClass
                                 }
                                 onClick={() => handleClick('Details')}>
                                 Product Details
@@ -55,7 +56,7 @@ function ItemInfo({ children, ...props }) {
                         <li className=" font-plusj  text-gray-500  hover:text-black">
                             <button
                                 className={
-                                    Display === 'rating' ? listButtonClass : ''
+                                    Display === 'rating' && listButtonClass
                                 }
                                 onClick={() => handleClick('rating')}>
                                 Rating & Reviews
@@ -64,7 +65,7 @@ function ItemInfo({ children, ...props }) {
                         <li className=" font-plusj  text-gray-500  hover:text-black">
                             <button
                                 className={
-                                    Display === 'FAQs' ? listButtonClass : ''
+                                    Display === 'FAQs' && listButtonClass
                                 }
                                 onClick={() => handleClick('FAQs')}>
                                 FAQs
@@ -88,7 +89,7 @@ function ItemInfo({ children, ...props }) {
                             <div className=" flex gap-2">
                                 <button className=" flex items-center gap-2 rounded-3xl px-2  border-2 border-solid font-plusj bg-main_gray">
                                     <p>Latest</p>
-                                    <img src={arrowDown} alt="" />
+                                    <Image src={arrowDown} alt="" />
                                 </button>
                                 <Button
                                     title="write a review"

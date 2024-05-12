@@ -1,115 +1,82 @@
-"use client";
-import { useState } from "react";
-import settingsIcon from "@/app/_assets/setting-lines.png";
-import FilterButton from "@/app/_components/client/FilterButton";
-import Button from "@/app/_components/client/Button";
-import arrowRightBlack from "@/app/_assets/right-arrow-black.png";
-import Image from "next/image";
-function MobileFilter() {
-	let [isClicked, setIsClicked] = useState(false);
+'use client'
+import { useState } from 'react'
+import settingsIcon from '@/app/_assets/setting-lines.png'
+import FilterButton from '@/app/_components/client/FilterButton'
+import Button from '@/app/_components/client/Button'
+import arrowRightBlack from '@/app/_assets/right-arrow-black.png'
+import Image from 'next/image'
+import cancel from '@/app/_assets/cancelIcon.png'
+import { useRouter } from 'next/navigation'
 
-	let [isdressStyleClicked, setIsClickedDressStyleClicked] = useState(false);
+function MobileFilter({ display }) {
+    let [isClicked, setIsClicked] = useState(false)
 
-	function handleSettingsClick() {
-		setIsClicked(!isClicked);
-	}
+    let [isdressStyleClicked, setIsClickedDressStyleClicked] = useState(false)
 
-	let imageClasses = `duration-200 ${isClicked ? "rotate" : ""}`;
+    function handleSettingsClick() {
+        setIsClicked(!isClicked)
+    }
 
-	let arrowClasses = `duration-200 ${isdressStyleClicked ? "rotate" : ""}`;
+    let router = useRouter()
+    const filterFunc = filter => {
+        router.push(`/shop?${filter} `)
+    }
+    let imageClasses = `duration-200 ${isClicked ? 'rotate' : ''}`
 
-	function handleArrowClicked() {
-		setIsClickedDressStyleClicked(!isdressStyleClicked);
-	}
-	return (
-		<aside className="  z-10 w-full  md:hidden  rounded-xl border-2 border-solid border-main_gray p-3">
-			<div className="flex justify-between">
-				<h4 className=" font-plusj font-bold">Filter</h4>
-				<button
-					onClick={handleSettingsClick}
-					className=" w-5 h-5">
-					<Image
-						src={settingsIcon}
-						alt=""
-						className={imageClasses}
-					/>
-				</button>
-				<button
-					onClick={handleSettingsClick}
-					className=" w-5 h-5">
-					<Image
-						src={settingsIcon}
-						alt=""
-						className={imageClasses}
-					/>
-				</button>
-			</div>
+    let arrowClasses = `duration-200 ${isdressStyleClicked ? 'rotate' : ''}`
 
-			{isClicked && (
-				<div>
-					<hr className="h-1 bg-hrColor my-4" />
-					<ul>
-						<li>
-							<FilterButton title="T-shirts" />
-						</li>
-						<li>
-							<FilterButton title="Shorts" />
-						</li>
-						<li>
-							<FilterButton title="Shirts" />
-						</li>
-						<li>
-							<FilterButton title="Hoodie" />
-						</li>
-						<li>
-							<FilterButton title="Jeans" />
-						</li>
-					</ul>
-				</div>
-			)}
+    function handleArrowClicked() {
+        setIsClickedDressStyleClicked(!isdressStyleClicked)
+    }
+    return (
+        <aside className="  z-10  md:hidden absolute bg-white top-20 w-[80%] left-[50%] -translate-x-[50%] rounded-xl border-2 border-solid border-main_gray p-4">
+            <div className="flex justify-between">
+                <h4 className=" font-plusj font-bold">Filter</h4>
+            </div>
 
-			<hr className="h-1 bg-hrColor my-4" />
+            <hr className="h-1 bg-hrColor my-4" />
 
-			<div className="flex justify-between mb-4">
-				<h4 className=" font-plusj font-bold">Dress Style</h4>
-				<button
-					onClick={handleArrowClicked}
-					className=" w-4 h-4">
-					<Image
-						src={arrowRightBlack}
-						alt=""
-						className={arrowClasses}
-					/>
-				</button>
-			</div>
+            <div
+                onClick={handleArrowClicked}
+                className="flex justify-between mb-4">
+                <h4 className=" font-plusj font-bold">Dress Style</h4>
 
-			{isdressStyleClicked && (
-				<ul>
-					<li>
-						<FilterButton title="Casual" />
-					</li>
-					<li>
-						<FilterButton title="Formal" />
-					</li>
-					<li>
-						<FilterButton title="Party" />
-					</li>
-					<li>
-						<FilterButton title="Gym" />
-					</li>
-				</ul>
-			)}
+                <Image
+                    src={arrowRightBlack}
+                    alt=""
+                    className={arrowClasses + ' w-4 h-4'}
+                />
+            </div>
 
-			<div className=" my-5">
-				<Button
-					title="Apply Filter"
-					bg_color="bg-black"
-					text_color="text-white"
-					mobile_width="w-full"
-					pc_width="w-full"
-				/>
-			</div>
-		</aside>
-	);
+            {isdressStyleClicked && (
+                <ul>
+                    <li
+                        onClick={() => {
+                            filterFunc('category_id=1')
+                        }}>
+                        <FilterButton title="Casual" />
+                    </li>
+                    <li
+                        onClick={() => {
+                            filterFunc('category_id=2')
+                        }}>
+                        <FilterButton title="Formal" />
+                    </li>
+                    <li
+                        onClick={() => {
+                            filterFunc('category_id=3')
+                        }}>
+                        <FilterButton title="Party" />
+                    </li>
+                    <li
+                        onClick={() => {
+                            filterFunc('category_id=4')
+                        }}>
+                        <FilterButton title="Gym" />
+                    </li>
+                </ul>
+            )}
+        </aside>
+    )
 }
-export default MobileFilter;
+export default MobileFilter

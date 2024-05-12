@@ -16,10 +16,12 @@ import ClothItem from '@/app/_components/client/ClothItem.jsx'
 import { products } from '@/app/_components/client/products.js'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 function Home() {
     let router = useRouter()
     const productsSample = products.slice(0, 4)
+
     return (
         <main>
             <div className=" container px-4 m-auto ">
@@ -125,6 +127,7 @@ function Home() {
                     </div>
                 </div>
             </header>
+
             <Preview path={'latest=1'} title="new arrivals">
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
                     {productsSample.map(product => (
@@ -132,6 +135,7 @@ function Home() {
                     ))}
                 </div>
             </Preview>
+
             <Preview path={'best_seller=1'} title="top selling">
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
                     {productsSample.map(product => (

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import deleteIcon from '@/app/_assets/delete.png'
 import Plus from '@/app/_assets/plusIcon.svg'
 import Minus from '@/app/_assets/MinusIcon.svg'
+import Image from 'next/image'
 function CartProduct({ ...props }) {
     const [counter, setCounter] = useState(1)
     function handleAdd() {
@@ -15,7 +16,7 @@ function CartProduct({ ...props }) {
         <>
             <div className="flex gap-3">
                 <div>
-                    <img
+                    <Image
                         src={props.src}
                         alt={props.title}
                         className=" w-[99px] h-[99px] md:h-[124px] md:w-[124px]"
@@ -28,7 +29,7 @@ function CartProduct({ ...props }) {
                         </h5>
                         <div className=" w-6 h-6">
                             <button>
-                                <img src={deleteIcon} alt="" />
+                                <Image src={deleteIcon} alt="" />
                             </button>
                         </div>
                     </div>
@@ -55,13 +56,13 @@ function CartProduct({ ...props }) {
                             <button
                                 className="font-bold w-4 h-4 md:w-5 md:h-5"
                                 onClick={handleMinus}>
-                                <img src={Minus} alt="" />
+                                <Image src={Minus} alt="" />
                             </button>
                             <p className=" font-plusj text-lg">{counter}</p>
                             <button
                                 className="font-bold w-4 h-4 md:w-5 md:h-5"
                                 onClick={handleAdd}>
-                                <img src={Plus} alt="" />
+                                <Image src={Plus} alt="" />
                             </button>
                         </div>
                     </div>

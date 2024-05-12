@@ -2,7 +2,6 @@
 
 module.exports = {
     images: {
-        domains: ['loremflickr.com'],
-        domains: ['localhost'],
+        domains: ['loremflickr.com', 'localhost'],
     },
 }

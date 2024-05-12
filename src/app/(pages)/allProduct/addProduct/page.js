@@ -13,8 +13,6 @@ import { validateForm, sendData } from '@/app/_components/function'
 import PopUp from '@/app/_components/PopUp'
 import Loader from '@/app/_components/Loader'
 function ProductDetails(props) {
-    const [rejected, setRejected] = useState([])
-
     //validate form and show propiate massege
     const [formValidate, setFormValidate] = useState({
         state: true,
@@ -44,24 +42,14 @@ function ProductDetails(props) {
     }
 
     //remove uploaded Image
-
-    const removeImage = () => {
+    console.log(formData)
+    const takepic = inputPic => {
         setFormData(e => {
-            return { ...e, picture: '' }
-        })
-    }
-
-    const takepic=(inputPic)=>{
-        setFormData((e)=>{
-            return {...e,
-                    picture:inputPic}
+            return { ...e, picture: inputPic }
         })
     }
 
     // remove rejected Image
-    const removeRejected = name => {
-        setRejected(files => files.filter(({ file }) => file.name !== name))
-    }
 
     ///handle input
     const handleFormdata = e => {
@@ -165,9 +153,9 @@ function ProductDetails(props) {
                         {' '}
                         product gallery
                     </h2>
-                    <Dropzone 
-                      handleFormChange={takepic}
-                      urlPath='api/product/upload'
+                    <Dropzone
+                        handleFormChange={takepic}
+                        urlPath="api/product/upload"
                     />
 
                     <div className="flex  justify-between flex-col md:flex-row gap-2">
