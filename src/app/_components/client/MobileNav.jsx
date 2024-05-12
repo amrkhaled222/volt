@@ -8,7 +8,7 @@ import searchIcon from '@/app/_assets/searchIcon.png'
 import Image from 'next/image'
 import burgerIcon from '@/app/_assets/burgerIcon.png'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-
+import UserMenu from './userMenu'
 import Link from 'next/link'
 export default function MobileNav() {
     let router = useRouter()
@@ -16,6 +16,9 @@ export default function MobileNav() {
     let searchPar = useSearchParams()
     const [menu, tooglemenu] = useState(false)
 
+    const SearchFunc = param => {
+        router.push(`/shop?${param}`)
+    }
     const stopScrolling = e => {
         if (e) {
             document.querySelector('body').classList.remove('overflow-hidden')
@@ -141,7 +144,7 @@ export default function MobileNav() {
                     }}
                     alt="shop icon"
                     src={cartImg}></Image>
-                <Image alt="profileIcon" src={profile}></Image>
+                <UserMenu />
             </div>
         </nav>
     )
