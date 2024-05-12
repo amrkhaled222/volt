@@ -7,8 +7,8 @@ export default function ImagePreview({ picture, title = 'product Image' }) {
                     <Image
                         width={30}
                         height={30}
-                        src={picture?.preview ? picture.preview : picture}
-                        alt={picture?.name ? picture.name : title}
+                        src={picture}
+                        alt="picture"
                         className=" w-full h-full rounded-md"
                     />
                 </div>

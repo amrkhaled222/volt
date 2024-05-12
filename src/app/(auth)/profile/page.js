@@ -3,17 +3,26 @@ import { useEffect, useState } from 'react'
 import avatarIcon from '@/app/_assets/user.png'
 import Image from 'next/image'
 import rightArrowIcon from '@/app/_assets/arrow-right-bold 1.svg'
+import Dropzone from '@/app/_components/Dropzone'
+import { useRouter } from 'next/navigation'
+import { sendData } from '@/app/_components/function'
 function Profile() {
     const [formData, setFormData] = useState({
-        Address: '',
+        address: '',
         country: '',
         city: '',
         postal_code: '',
         phone_number: '',
-        picture: '',
+        image: '',
     })
     const [loader, setloader] = useState(false)
     const [dataSent, setDataSent] = useState(false)
+    const [query, setquery] = useState('')
+    let router = useRouter()
+    const changePath = () => {
+        router.push('/Home')
+    }
+    //validate form and show propiate massege
     const handleFormdata = e => {
         const { name, value } = e.target
 
@@ -22,6 +31,33 @@ function Profile() {
             [name]: value,
         }))
     }
+    const handleImageChange =(inputPic)=>{
+        setFormData(e => ({
+            ...e,
+            'image': inputPic
+        }))
+    }
+    const AddButton = e => {
+        e.preventDefault()
+        setquery('send data')
+    }
+
+    useEffect(() => {
+        if (query == 'send data') {
+            setloader(true)
+            sendData(setDataSent, formData, 'api/user/contact')
+        }
+    }, [query])
+
+    useEffect(() => {
+        if (dataSent) {
+            setTimeout(() => {
+                changePath()
+                setloader(false)
+            }, 3000)
+        }
+    }, [dataSent])
+
     let containerStyle = 'flex flex-col gap-3 '
     let labelStyle = 'text-xl font-medium'
     let inputStyle =
@@ -31,13 +67,19 @@ function Profile() {
         <div className="flex justify-center gap-14  flex-col items-center ">
             <div className="flex justify-center items-center pt-3">
                 <Image
+                    width='60'
+                    height='60'
                     alt="avatar"
                     className="w-40 h-40 rounded-[50%]"
-                    src={formData.picture == '' ? avatarIcon : formData.picture}
+                    src={formData.image == '' ? avatarIcon : formData.image}
                 />
             </div>
+            <Dropzone 
+                handleFormChange={(e) => handleImageChange(e)}
+                urlPath='api/user/contact/upload'
+            />
             <form
-                method="post"
+                onSubmit={AddButton}
                 className="sm:max-w-[100%] max-w-[280px]  justify-center  m-auto flex flex-col gap-5 ">
                 <h1 className=" capitalize text-2xl font-bold  font-rubik text-center m-0">
                     please insert your data
@@ -50,7 +92,7 @@ function Profile() {
                         country
                     </label>
                     <input
-                        onChange={setFormData}
+                        onChange={(e) => handleFormdata(e)}
                         required
                         className={inputStyle}
                         id="country"
@@ -64,7 +106,7 @@ function Profile() {
                         city
                     </label>
                     <input
-                        onChange={setFormData}
+                        onChange={(e) => handleFormdata(e)}
                         required
                         className={inputStyle}
                         id="city"
@@ -78,11 +120,11 @@ function Profile() {
                         Address
                     </label>
                     <input
-                        onChange={setFormData}
+                        onChange={(e) => handleFormdata(e)}
                         required
                         className={inputStyle}
-                        name="Address"
-                        value={formData.Address}
+                        name="address"
+                        value={formData.address}
                         id="Address"
                         placeholder="write your Address here"
                     />
@@ -93,7 +135,7 @@ function Profile() {
                         postal code
                     </label>
                     <input
-                        onChange={setFormData}
+                        onChange={(e) => handleFormdata(e)}
                         required
                         className={inputStyle}
                         name="postal_code"
@@ -106,7 +148,7 @@ function Profile() {
                         phone number
                     </label>
                     <input
-                        onChange={setFormData}
+                        onChange={(e) => handleFormdata(e)}
                         required
                         className={inputStyle}
                         name="phone_number"
@@ -114,7 +156,7 @@ function Profile() {
                         placeholder="write your phone number here"
                     />
                 </div>
-                <div className={containerStyle}>
+                {/* <div className={containerStyle}>
                     <label htmlFor="picture" className={labelStyle}>
                         upload your photo
                     </label>
@@ -122,19 +164,14 @@ function Profile() {
                         onChange={setFormData}
                         className={inputStyle}
                         type="file"
-                        name="picture"
-                        value={formData.picture}
+                        name="image"
+                        value={formData.image}
                         placeholder="upload your picture"
                     />
-                </div>
+                </div> */}
 
                 <button
                     type="submit"
-                    onClick={e => {
-                        if (loader) {
-                            e.preventDefault()
-                        }
-                    }}
                     className=" cursor-pointer hover:scale-95 duration-300  flex w-full border border-black p-2 rounded-lg uppercase font-bold justify-between items-center ">
                     {' '}
                     Next
@@ -145,6 +182,7 @@ function Profile() {
                     )}
                 </button>
             </form>
+
         </div>
     )
 }

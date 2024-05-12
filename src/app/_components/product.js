@@ -13,7 +13,10 @@ function Product(props) {
                     className="w-22 h-22"
                     width={84}
                     height={84}
-                    src={`${props.picture}`}
+
+                    src={props.picture}
+
+
                     alt="productImage"></Image>
                 <div className=" flex flex-col justify-between">
                     <div className="flex flex-col gap-1">

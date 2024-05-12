@@ -37,6 +37,12 @@ function ProductDetails(props) {
 
     // send data to api
 
+    // redirect User
+
+    const redirectUser = () => {
+        router.push('/allProduct')
+    }
+
     //remove uploaded Image
 
     const removeImage = () => {
@@ -88,9 +94,18 @@ function ProductDetails(props) {
     useEffect(() => {
         if (query == 'send data') {
             setloader(true)
-            sendData(setDataSent, formData)
+            sendData(setDataSent, formData, '/api/product')
         }
     }, [query])
+
+    useEffect(() => {
+        if (dataSent) {
+            setTimeout(() => {
+                redirectUser()
+                setloader(false)
+            }, 3000)
+        }
+    }, [dataSent])
 
     return (
         <div className=" p-4 container m-auto">
@@ -152,6 +167,7 @@ function ProductDetails(props) {
                     </h2>
                     <Dropzone 
                       handleFormChange={takepic}
+                      urlPath='api/product/upload'
                     />
 
                     <div className="flex  justify-between flex-col md:flex-row gap-2">
