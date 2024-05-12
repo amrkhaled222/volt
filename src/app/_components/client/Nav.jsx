@@ -3,11 +3,10 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import cartImg from '@/app/_assets/cart.png'
-import profile from '@/app/_assets/profile.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-
+import UserMenu from './userMenu'
 function Nav() {
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -123,7 +122,7 @@ function Nav() {
                 method="Get"
                 onSubmit={e => {
                     e.preventDefault()
-                    console.log()
+
                     SearchFunc(e.target[0].value)
                 }}
                 className="xl:w-1/2 md:w-1/3 relative before:contents[''] before:bg-no-repeat before:bg-cover before:bg-search before:absolute before:w-5 before:h-5 before:left-3 before:top-1/2 before:-translate-y-1/2  ">
@@ -140,10 +139,7 @@ function Nav() {
                     alt="cartImage"
                     src={cartImg}
                     className=" w-5 hover:cursor-pointer"></Image>
-                <Image
-                    alt="profile"
-                    src={profile}
-                    className=" w-5 hover:cursor-pointer"></Image>
+                <UserMenu></UserMenu>
             </div>
         </nav>
     )

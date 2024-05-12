@@ -8,8 +8,8 @@ import downArrowActive from '../_assets/downArrowActive.png'
 import downArrowNonActive from '../_assets/downArrowNonActive.png'
 import MobileNav from '../_components/MobileNav'
 import Link from 'next/link'
-import nextIcon from '../_assets/next.png'
-import logOutIcon from '../_assets/logOut.png'
+import nextIcon from '@/app/_assets/next.png'
+import logOutIcon from '@/app/_assets/logOut.png'
 import PathTitle from '../_components/PathTitle'
 
 export default function RootLayout({ children }) {

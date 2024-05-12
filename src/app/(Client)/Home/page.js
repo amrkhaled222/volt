@@ -6,7 +6,6 @@ import Zara from '@/app/_assets/zara-logo-1 1.svg'
 import Gucci from '@/app/_assets/gucci-logo-1 1.svg'
 import prada from '@/app/_assets/prada-logo-1 1.svg'
 import Calvin from '@/app/_assets/calvin.svg'
-import Button from '@/app/_components/client/Button'
 import Preview from '@/app/_components/client/Preview'
 import Browse from '@/app/_components/client/Browse'
 import HappyCustomers from '@/app/_components/client/HappyCustomers.jsx'
@@ -15,7 +14,6 @@ import MobileNav from '@/app/_components/client/MobileNav.jsx'
 import Nav from '@/app/_components/client/Nav.jsx'
 import ClothItem from '@/app/_components/client/ClothItem.jsx'
 import { products } from '@/app/_components/client/products.js'
-import { feedbacks } from '@/app/_components/client/feedbacks.js'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -24,7 +22,7 @@ function Home() {
     const productsSample = products.slice(0, 4)
     return (
         <main>
-            <div className=" container px-4 m-auto      ">
+            <div className=" container px-4 m-auto ">
                 <MobileNav />
                 <Nav />
             </div>
