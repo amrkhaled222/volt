@@ -112,13 +112,13 @@ function CategoryPage(props) {
                                 {loader && (
                                     <Loader style="min-h-[100%] bg-transparent absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 "></Loader>
                                 )}
-                                {/* {!loader &&
-                                    products.map(product => (
+                                {!loader &&
+                                    allData.data.map(product => (
                                         <ClothItem
                                             key={product.id}
                                             {...product}
                                         />
-                                    ))} */}
+                                ))} 
                             </div>
                             <hr className="h-1 bg-hrColor my-4" />
                             {allData?.last_page > 1 && (
