@@ -136,7 +136,7 @@ function CategoryPage(props) {
                                         previousLinkClassName="border p-2 rounded-md"
                                         nextLinkClassName="border py-2 px-4 rounded-md"
                                         activeClassName="bg-black text-white"
-                                        pageClassName="px-2 py-1 rounded-md border hidden sm:flex "
+                                        pageClassName="px-2 py-1 rounded-md border hidden sm:flex hover:scale-95 duration-300  "
                                     />
                                 </div>
                             )}
