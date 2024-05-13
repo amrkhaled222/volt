@@ -2,7 +2,11 @@ import star from '@/app/_assets/star.png'
 import Image from 'next/image'
 import Link from 'next/link'
 function ClothItem({ ...props }) {
-    let rating = props.rate
+    let rating = 0
+    if (props.rate){
+        rating = props.rate
+    }
+    
     let finalRate = Math.floor(rating)
     const stars = new Array(finalRate).fill(0)
     return (
@@ -11,7 +15,7 @@ function ClothItem({ ...props }) {
             className=" cursor-pointer hover:scale-95 duration-300"
             key={props.id}>
             <div className=" mb-3">
-                <Image src={props.src} alt={props.title} />
+                <Image src={props.picture} width={200} height={100} alt={props.title} />
             </div>
 
             <h3 className=" font-plusj font-bold text-sm mb-2">

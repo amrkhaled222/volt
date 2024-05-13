@@ -6,7 +6,6 @@ import MobileNav from '@/app/_components/client/MobileNav'
 import Nav from '@/app/_components/client/Nav'
 import ClothItem from '@/app/_components/client/ClothItem'
 import { products } from '@/app/_components/client/products'
-i
 function ItemPage() {
     const productsSample = products.slice(0, 4)
     return (
