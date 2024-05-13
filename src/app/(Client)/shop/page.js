@@ -30,6 +30,7 @@ function CategoryPage(props) {
     const fetchAllData = async () => {
         try {
             setLoader(true)
+            setPage(1)
             await axios
                 .get(
                     `api/product?${Object.keys(search).map(e => {
@@ -118,7 +119,7 @@ function CategoryPage(props) {
                                             key={product.id}
                                             {...product}
                                         />
-                                ))} 
+                                    ))}
                             </div>
                             <hr className="h-1 bg-hrColor my-4" />
                             {allData?.last_page > 1 && (
@@ -133,10 +134,11 @@ function CategoryPage(props) {
                                         }
                                         breakLabel="..."
                                         containerClassName="flex gap-2 justify-between items-center max-w[70%]"
-                                        previousLinkClassName="border p-2 rounded-md"
-                                        nextLinkClassName="border py-2 px-4 rounded-md"
+                                        previousLinkClassName="border p-2 rounded-lg hover:scale-95 duration-300  "
+                                        nextLinkClassName="border py-2 px-4 rounded-lg hover:scale-95 duration-300 "
                                         activeClassName="bg-black text-white"
-                                        pageClassName="px-2 py-1 rounded-md border hidden sm:flex hover:scale-95 duration-300  "
+                                        pageClassName=" rounded-lg hover:scale-95 duration-300  "
+                                        pageLinkClassName=" px-3 py-1  rounded-lg border hidden sm:flex "
                                     />
                                 </div>
                             )}

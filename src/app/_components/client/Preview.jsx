@@ -16,7 +16,7 @@ function Preview({ title, children, path }) {
                 <div className="flex justify-center font-montserrat">
                     <button
                         onClick={() => {
-                            router.push(`shop?${path}`)
+                            router.push(`/shop?${path}`)
                         }}
                         className="rounded-3xl  block p-2 border-2 border-solid font-plusj text-black bg-white w-40">
                         View All
