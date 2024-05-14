@@ -14,7 +14,7 @@ export default function Dashboard() {
         setLoader(true)
         await axios.get(`api/order`).then(res => {
             setAllData(res.data[0][1])
-            console.log(res.data[0][1])
+
             setLoader(false)
         })
     }

@@ -5,7 +5,7 @@ import Footer from '@/app/_components/client/Footer'
 import MobileNav from '@/app/_components/client/MobileNav'
 import Nav from '@/app/_components/client/Nav'
 import ClothItem from '@/app/_components/client/ClothItem'
-import { products } from '@/app/_components/client/products'
+
 import { useState, useEffect } from 'react'
 import axios from '@/lib/axios'
 import Loader from '@/app/_components/Loader'
@@ -14,7 +14,7 @@ function ItemPage(props) {
     const [product, setProduct] = useState({})
     const [similar, setSimilar] = useState([])
     const [youMightAlsoLike, setYouMight] = useState({})
-    console.log(youMightAlsoLike)
+
     const youmightalsolike = async () => {
         try {
             await axios.get(`api/product`).then(res => {
@@ -38,8 +38,6 @@ function ItemPage(props) {
         try {
             await axios.get(`api/product/${props.params.product}`).then(res => {
                 setProduct(res.data.product)
-                console.log(res.data.product)
-                console.log(props)
             })
         } catch (err) {
             throw new Error(err)
@@ -78,7 +76,7 @@ function ItemPage(props) {
                     {Object.keys(youMightAlsoLike).length == 0 && (
                         <Loader
                             style="bg-transparent"
-                            childStyle=" justify-center items-center    "></Loader>
+                            childStyle=" justify-center items-center "></Loader>
                     )}
                 </div>
             </Preview>

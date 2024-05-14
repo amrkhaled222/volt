@@ -127,7 +127,7 @@ export default function MobileNav() {
                     method="Get"
                     onSubmit={e => {
                         e.preventDefault()
-                        console.log()
+
                         SearchFunc(e.target[0].value)
                     }}
                     className=" mt-9 relative before:contents[''] before:bg-no-repeat before:bg-cover before:bg-search before:absolute before:w-5 before:h-5 before:left-3 before:top-1/2 before:-translate-y-1/2  ">

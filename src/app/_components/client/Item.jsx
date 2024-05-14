@@ -14,7 +14,6 @@ import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 let cart = new Array()
 function Item({ product }) {
-    const [counter, setCounter] = useState(1)
     const { user } = useAuth()
     const [quantity, setQuantity] = useState(1)
     const [Active, setActive] = useState('Small')
@@ -28,16 +27,13 @@ function Item({ product }) {
     }
 
     async function handleAddToCart() {
-        console.log('add')
         if (user) {
             try {
                 await axios
                     .post(`api/cart/add/${product.id}`, {
                         quantity: quantity,
                     })
-                    .then(res => {
-                        console.log(res)
-                    })
+                    .then(res => {})
             } catch (err) {
                 throw new Error(err)
             }
@@ -54,32 +50,7 @@ function Item({ product }) {
         setQuantity(prev => prev - 1)
     }
 
-    function handleAdd() {
-        setCounter(prev => prev + 1)
-    }
-
-    function handleMinus() {
-        setCounter(prev => prev - 1)
-    }
-
-    function handleActive(params) {
-        if (params === 'Small') {
-            setActive('Small')
-        } else if (params === 'Medium') {
-            setActive('Medium')
-        } else if (params === 'Large') {
-            setActive('Large')
-        } else if (params === 'X-Large') {
-            setActive('X-Large')
-        }
-    }
-
     // localStorage.setItem("cart", JSON.stringify(cart));
-
-    function handleAddToCart() {
-        cart.push(x)
-        setAddToCart(cart)
-    }
 
     localStorage.setItem('cart', JSON.stringify(cart))
 
