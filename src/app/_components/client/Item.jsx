@@ -1,20 +1,27 @@
-'use state'
-import brownTshirt from '@/app/_assets/brownT-shirt.png'
-import brownTshirtBack from '@/app/_assets/brownT-shirt-back.png'
-import brownTshirtModel from '@/app/_assets/brownT-shirt-model.png'
-import star from '@/app/_assets/star.png'
-import Plus from '@/app/_assets/plusIcon.svg'
-import Minus from '@/app/_assets/MinusIcon.svg'
-import Button from './Button'
-import ItemInfo from './ItemInfo'
-import { useState } from 'react'
-import SizeButton from './SizeButton'
-import Image from 'next/image'
-let cart = new Array()
+
+"use state";
+import brownTshirt from "@/app/_assets/brownT-shirt.png";
+import brownTshirtBack from "@/app/_assets/brownT-shirt-back.png";
+import brownTshirtModel from "@/app/_assets/brownT-shirt-model.png";
+import star from "@/app/_assets/star.png";
+import Plus from "@/app/_assets/plusIcon.svg";
+import Minus from "@/app/_assets/MinusIcon.svg";
+import Button from "./Button";
+import ItemInfo from "./ItemInfo";
+import { useState } from "react";
+import SizeButton from "./SizeButton";
+import Image from "next/image";
+import { useAuth } from "@/hooks/auth";
+import axios from "@/lib/axios";
+let cart = new Array();
 function Item({ product }) {
-    const [counter, setCounter] = useState(1)
-    const [Active, setActive] = useState('Small')
-    const [addtoCart, setAddToCart] = useState()
+	const [counter, setCounter] = useState(1);
+	const {user} = useAuth()
+	const [quantity, setQuantity] = useState(1)
+	const [Active, setActive] = useState("Small");
+	const [addtoCart, setAddToCart] = useState();
+	
+
 
     let rating = product.rate
     let finalRate = Math.floor(rating)
@@ -23,6 +30,36 @@ function Item({ product }) {
         stars = new Array(finalRate).fill(0)
     }
 
+
+	async function  handleAddToCart() {
+		console.log('add')
+		if(user){
+			try {
+				await axios
+					.post(
+						`api/cart/add/${product.id}`,{
+							'quantity': quantity
+						}
+					)
+					.then(res => {
+						console.log(res)
+					})
+			} catch (err) {
+				throw new Error(err)
+			}
+		} else {
+		    setAddToCart();
+		}
+    }
+
+	function handleAdd() {
+		setQuantity((prev) => prev + 1);
+	}
+
+	function handleMinus() {
+		setQuantity((prev) => prev - 1);
+	}
+
     function handleAdd() {
         setCounter(prev => prev + 1)
     }
@@ -30,6 +67,7 @@ function Item({ product }) {
     function handleMinus() {
         setCounter(prev => prev - 1)
     }
+
 
     function handleActive(params) {
         if (params === 'Small') {
@@ -43,12 +81,16 @@ function Item({ product }) {
         }
     }
 
+
+	// localStorage.setItem("cart", JSON.stringify(cart));
+
     function handleAddToCart() {
         cart.push(x)
         setAddToCart(cart)
     }
 
     localStorage.setItem('cart', JSON.stringify(cart))
+
 
     return (
         <section className=" mt-7">
@@ -156,39 +198,44 @@ function Item({ product }) {
 								</div>
 							</div>
 						</div> */}
-                        <hr className="h-1 bg-hrColor" />
-                        <div className=" flex gap-6 mt-5">
-                            <div className=" flex w-[30%] bg-main_gray px-4 justify-between rounded-3xl text-sm md:text-base  p-1 border-2 border-solid font-plusj">
-                                <button className="font-bold">
-                                    <Image
-                                        src={Minus}
-                                        alt=""
-                                        onClick={handleMinus}
-                                    />
-                                </button>
-                                <p className=" font-plusj text-lg">{counter}</p>
-                                <button
-                                    className="font-bold"
-                                    onClick={handleAdd}>
-                                    <Image src={Plus} alt="" />
-                                </button>
-                            </div>
-                            <div className="w-[60%]">
-                                <Button
-                                    title="Add To Cart"
-                                    text_color="text-white"
-                                    bg_color="bg-black"
-                                    pc_width="w-full"
-                                    mobile_width="w-full"
-                                    handleClick={handleAddToCart}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <ItemInfo />
-        </section>
-    )
+
+						<hr className="h-1 bg-hrColor" />
+						<div className=" flex gap-6 mt-5">
+							<div className=" flex w-[30%] bg-main_gray px-4 justify-between rounded-3xl text-sm md:text-base  p-1 border-2 border-solid font-plusj">
+								<button className="font-bold">
+									<Image
+										src={Minus}
+										alt=""
+										onClick={handleMinus}
+									/>
+								</button>
+								<p className=" font-plusj text-lg">{quantity}</p>
+								<button
+									className="font-bold"
+									onClick={handleAdd}>
+									<Image
+										src={Plus}
+										alt=""
+									/>
+								</button>
+							</div>
+							<div className="w-[60%]">
+								<Button
+									title="Add To Cart"
+									text_color="text-white"
+									bg_color="bg-black"
+									pc_width="w-full"
+									mobile_width="w-full"
+									handleClick={handleAddToCart}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ItemInfo />
+		</section>
+	);
+
 }
 export default Item
