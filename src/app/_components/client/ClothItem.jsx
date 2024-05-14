@@ -18,13 +18,14 @@ function ClothItem({ ...props }) {
             <div className=" mb-3">
                 <Image
                     src={props.picture}
-                    width={200}
-                    height={100}
+                    width={300}
+                    height={400}
                     alt={props.title}
+                    className='h-[400px]'
                 />
             </div>
 
-            <h3 className=" font-plusj font-bold text-sm mb-2">
+            <h3 className=" font-plusj font-bold text-sm mb-2 truncate">
                 {props.title}
             </h3>
 

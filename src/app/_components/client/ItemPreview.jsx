@@ -1,11 +1,10 @@
 import Item from "@/app/_components/client/Item";
 
 import { products } from "@/app/_components/client/products";
-function ItemPreview() {
-	let product = products[0];
+function ItemPreview({product}) {
 	return (
 		<section>
-			<Item {...product} />
+			<Item product = {product} />
 		</section>
 	);
 }

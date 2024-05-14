@@ -11,14 +11,17 @@ import { useState } from "react";
 import SizeButton from "./SizeButton";
 import Image from "next/image";
 let cart = new Array();
-function Item({ ...props }) {
+function Item({ product }) {
 	const [counter, setCounter] = useState(1);
 	const [Active, setActive] = useState("Small");
 	const [addtoCart, setAddToCart] = useState();
 
-	let rating = props.rate;
+	let rating = product.rate;
 	let finalRate = Math.floor(rating);
-	const stars = new Array(finalRate).fill(0);
+	let stars = false
+	if (rating){
+		stars = new Array(finalRate).fill(0);
+	}
 
 	function handleAdd() {
 		setCounter((prev) => prev + 1);
@@ -40,17 +43,6 @@ function Item({ ...props }) {
 		}
 	}
 
-	let x = {
-		id: props.id,
-		src: brownTshirt,
-		title: props.title,
-		rating: props.rating,
-		price: props.price,
-		rate: props.rate,
-		description: props.description,
-		quantity: counter,
-	};
-
 	function handleAddToCart() {
 		cart.push(x);
 		setAddToCart(cart);
@@ -63,46 +55,25 @@ function Item({ ...props }) {
 			<div className=" container px-4 m-auto max-w-7xl">
 				<div className="flex flex-col md:flex-row gap-8">
 					<div className="flex flex-col md:flex-row gap-3">
-						<div className="order-2 md:order-1 flex gap-3 md:flex-col">
-							<div className=" ">
-								<Image
-									src={brownTshirt}
-									alt=""
-									className=" w-[152px] h-[168px] rounded-2xl"
-								/>
-							</div>
-							<div>
-								<Image
-									src={brownTshirtBack}
-									alt=""
-									className="w-[152px] h-[168px] rounded-2xl"
-								/>
-							</div>
-							<div>
-								<Image
-									src={brownTshirtModel}
-									alt=""
-									className="w-[152px] h-[168px] rounded-2xl"
-								/>
-							</div>
-						</div>
 
 						<div className=" h-full order-1 md:order-2">
 							<Image
-								src={brownTshirt}
+								src={product.picture}
+								height={500}
+								width={350}
 								alt=""
-								className="h-full w-full"
+								className="h-[500px] w-[350px]"
 							/>
 						</div>
 					</div>
 
 					<div>
 						<h3 className=" font-montserrat font-semibold text-3xl">
-							{props.title}
+							{product.title}
 						</h3>
 						<div className=" flex gap-5 my-5">
 							<div className=" flex gap-2">
-								{stars.map((st, i) => (
+								{stars && stars.map((st, i) => (
 									<Image
 										src={star}
 										key={i}
@@ -111,15 +82,15 @@ function Item({ ...props }) {
 									/>
 								))}
 							</div>
-							<p className=" font-plusj ">{props.rating}</p>
+							<p className=" font-plusj ">{product.rating}</p>
 						</div>
 						<div className="my-5">
-							<p className="font-plusj font-bold text-2xl">{`$${props.price}`}</p>
+							<p className="font-plusj font-bold text-2xl">{`${product.price}`} LE</p>
 						</div>
 						<p className=" font-plusj text-sm text-gray-500 mb-4">
-							{props.description}
+							{product.description}
 						</p>
-						<hr className="h-1 bg-hrColor" />
+						{/* <hr className="h-1 bg-hrColor" />
 						<div className=" my-5">
 							<p className="mb-2 font-plusj text-gray-500 text-lg">
 								Select Colors
@@ -182,7 +153,7 @@ function Item({ ...props }) {
 									/>
 								</div>
 							</div>
-						</div>
+						</div> */}
 						<hr className="h-1 bg-hrColor" />
 						<div className=" flex gap-6 mt-5">
 							<div className=" flex w-[30%] bg-main_gray px-4 justify-between rounded-3xl text-sm md:text-base  p-1 border-2 border-solid font-plusj">
