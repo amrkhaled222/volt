@@ -38,6 +38,7 @@ function Cart({cart, total, changeTotal, changeCart}) {
                         pc_width={'w-full'}
                         mobile_width={'w-full'}
                         text_color={'text-white'}
+                        // handleClick={}
                     />
                 </div>
             </div>
