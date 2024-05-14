@@ -1,18 +1,27 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+
 import Nav from '../_components/Nav'
 import notification from '../_assets/notification.png'
 import Image from 'next/image'
 import downArrowActive from '../_assets/downArrowActive.png'
 import downArrowNonActive from '../_assets/downArrowNonActive.png'
 import MobileNav from '../_components/MobileNav'
-import Link from 'next/link'
-import nextIcon from '@/app/_assets/next.png'
+import { useRouter } from 'next/navigation'
 import logOutIcon from '@/app/_assets/logOut.png'
 import PathTitle from '../_components/PathTitle'
-
+import { useLayoutEffect } from 'react'
+import { redirect } from 'next/navigation'
+import { useAuth } from '@/hooks/auth'
+import StoreIcon from '@/app/_assets/grocery-store.png'
 export default function RootLayout({ children }) {
+    const user = useAuth()
+    let router = useRouter()
+    useLayoutEffect(() => {
+        if (!user?.user?.is_admin) {
+            redirect('/Home')
+        }
+    }, [])
     const [AdminActive, toogleAdmin] = useState(false)
 
     const handleAdminButton = () => {
@@ -67,7 +76,7 @@ export default function RootLayout({ children }) {
                                         ? 'bg-darkBlue text-white border-darkBlue   '
                                         : 'border-black'
                                 } `}>
-                                Admin
+                                {user?.user?.name}
                                 <Image
                                     alt="downArrow"
                                     className=" w-4 h-4"
@@ -84,27 +93,32 @@ export default function RootLayout({ children }) {
                                         ? ` ${transitionin} `
                                         : ` ${transitionout}`
                                 } flex flex-col  top-24 md:top-[110px]  right-4 text-black  z-20 p-4 rounded-md text-sm w-1/2   lg:gap-4 gap-2  `}>
-                                <h2 className=" font-medium capitalize p-1">
-                                    Admin
+                                <h2 className=" font-semibold text-xl capitalize  p-1">
+                                    {user?.user?.name}
                                 </h2>
-                                <Link
-                                    href={''}
-                                    className="flex items-center justify-between p-1 hover:scale-95 duration-300">
-                                    change password{' '}
+
+                                <button
+                                    className="flex items-center  font-medium justify-between p-1 hover:scale-95 duration-300"
+                                    onClick={() => {
+                                        router.push('/Home ')
+                                    }}>
+                                    store
                                     <Image
-                                        src={nextIcon}
-                                        alt="arrowIcon"
-                                        className="w-4 h-4"></Image>
-                                </Link>
-                                <Link
-                                    className="flex items-center justify-between p-1 hover:scale-95 duration-300"
-                                    href={''}>
+                                        className="w-4 h-4"
+                                        src={StoreIcon}
+                                        alt="storeIcon"></Image>
+                                </button>
+                                <button
+                                    className="flex items-center  font-medium justify-between p-1 hover:scale-95 duration-300"
+                                    onClick={() => {
+                                        user.logout()
+                                    }}>
                                     log out{' '}
                                     <Image
                                         className="w-4 h-4"
                                         src={logOutIcon}
                                         alt="logOut"></Image>
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>

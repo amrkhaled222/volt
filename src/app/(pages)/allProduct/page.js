@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import Loader from '@/app/_components/Loader'
 import axios from '@/lib/axios'
-
 export default function AllProduct() {
     const [product, setProduct] = useState({})
     const [loader, setLoader] = useState(true)
@@ -31,7 +30,7 @@ export default function AllProduct() {
                 <Loader></Loader>
             ) : (
                 <div>
-                    <div className="grid md:grid-cols-autoFlow grid-cols-autoFlowMobile grid-rows-allproduct_row gap-4 justify-evenly min-h-[80vh]">
+                    <div className="grid md:grid-cols-autoFlow grid-cols-autoFlowMobile gap-4 justify-evenly min-h-[80vh]">
                         {product.data.map((e, i) => {
                             return <Product {...e} key={e.id}></Product>
                         })}

@@ -57,61 +57,63 @@ function Item({ product }) {
 		setQuantity((prev) => prev - 1);
 	}
 
-	function handleActive(params) {
-		if (params === "Small") {
-			setActive("Small");
-		} else if (params === "Medium") {
-			setActive("Medium");
-		} else if (params === "Large") {
-			setActive("Large");
-		} else if (params === "X-Large") {
-			setActive("X-Large");
-		}
-	}
+    function handleActive(params) {
+        if (params === 'Small') {
+            setActive('Small')
+        } else if (params === 'Medium') {
+            setActive('Medium')
+        } else if (params === 'Large') {
+            setActive('Large')
+        } else if (params === 'X-Large') {
+            setActive('X-Large')
+        }
+    }
 
 	// localStorage.setItem("cart", JSON.stringify(cart));
 
-	return (
-		<section className=" mt-7">
-			<div className=" container px-4 m-auto max-w-7xl">
-				<div className="flex flex-col md:flex-row gap-8">
-					<div className="flex flex-col md:flex-row gap-3">
+    return (
+        <section className=" mt-7">
+            <div className=" container px-4 m-auto max-w-7xl">
+                <div className="flex flex-col md:flex-row gap-8">
+                    <div className="flex flex-col md:flex-row gap-3">
+                        <div className=" h-full order-1 md:order-2">
+                            <Image
+                                src={product.picture}
+                                height={500}
+                                width={350}
+                                alt=""
+                                className="max-h-[350px] max-w-[350px]"
+                            />
+                        </div>
+                    </div>
 
-						<div className=" h-full order-1 md:order-2">
-							<Image
-								src={product.picture}
-								height={500}
-								width={350}
-								alt=""
-								className="h-[500px] w-[350px]"
-							/>
-						</div>
-					</div>
-
-					<div>
-						<h3 className=" font-montserrat font-semibold text-3xl">
-							{product.title}
-						</h3>
-						<div className=" flex gap-5 my-5">
-							<div className=" flex gap-2">
-								{stars && stars.map((st, i) => (
-									<Image
-										src={star}
-										key={i}
-										className="h-4 w-4 "
-										alt="Customer Rating"
-									/>
-								))}
-							</div>
-							<p className=" font-plusj ">{product.rating}</p>
-						</div>
-						<div className="my-5">
-							<p className="font-plusj font-bold text-2xl">{`${product.price}`} LE</p>
-						</div>
-						<p className=" font-plusj text-sm text-gray-500 mb-4">
-							{product.description}
-						</p>
-						{/* <hr className="h-1 bg-hrColor" />
+                    <div>
+                        <h3 className=" font-montserrat font-semibold text-3xl">
+                            {product.title}
+                        </h3>
+                        <div className=" flex gap-5 my-5">
+                            <div className=" flex gap-2">
+                                {stars &&
+                                    stars.map((st, i) => (
+                                        <Image
+                                            src={star}
+                                            key={i}
+                                            className="h-4 w-4 "
+                                            alt="Customer Rating"
+                                        />
+                                    ))}
+                            </div>
+                            <p className=" font-plusj ">{product.rating}</p>
+                        </div>
+                        <div className="my-5">
+                            <p className="font-plusj font-bold text-2xl">
+                                {`${product.price}`} LE
+                            </p>
+                        </div>
+                        <p className=" font-plusj text-sm text-gray-500 mb-4">
+                            {product.description}
+                        </p>
+                        {/* <hr className="h-1 bg-hrColor" />
 						<div className=" my-5">
 							<p className="mb-2 font-plusj text-gray-500 text-lg">
 								Select Colors
@@ -213,4 +215,4 @@ function Item({ product }) {
 		</section>
 	);
 }
-export default Item;
+export default Item

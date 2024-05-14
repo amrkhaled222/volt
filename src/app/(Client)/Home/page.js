@@ -13,12 +13,11 @@ import Footer from '@/app/_components/client/Footer'
 import MobileNav from '@/app/_components/client/MobileNav.jsx'
 import Nav from '@/app/_components/client/Nav.jsx'
 import ClothItem from '@/app/_components/client/ClothItem.jsx'
-import { products } from '@/app/_components/client/products.js'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import axios from '@/lib/axios'
-
+import Loader from '@/app/_components/Loader'
 function Home() {
     let router = useRouter()
     const [allData, setAllData] = useState([])
@@ -26,13 +25,9 @@ function Home() {
 
     const fetchAllData = async () => {
         try {
-            await axios
-                .get(
-                    `api/product`,
-                )
-                .then(res => {
-                    setAllData(res.data.products.data.slice(0,3))
-                })
+            await axios.get(`api/product`).then(res => {
+                setAllData(res.data.products.data.slice(0, 3))
+            })
         } catch (err) {
             throw new Error(err)
         }
@@ -42,13 +37,9 @@ function Home() {
     }, [])
     const fetchBestData = async () => {
         try {
-            await axios
-                .get(
-                    `api/product?best_seller=1`,
-                )
-                .then(res => {
-                    setBest(res.data.products.data.slice(0,4))
-                })
+            await axios.get(`api/product?best_seller=1`).then(res => {
+                setBest(res.data.products.data.slice(0, 4))
+            })
         } catch (err) {
             throw new Error(err)
         }
@@ -165,18 +156,32 @@ function Home() {
             </header>
 
             <Preview path={'latest=1'} title="new arrivals">
-                <div className="flex flex-wrap justify-center gap-4 mb-10">
-                    {allData.map(product => (
-                        <ClothItem key={product.id} {...product} />
-                    ))}
+                <div className="flex flex-wrap justify-center gap-4 mb-10  min-h-[20vh] relative w-full">
+                    {allData.length == 0 && (
+                        <Loader
+                            style=" bg-transparent"
+                            childStyle=" justify-center items-center"></Loader>
+                    )}
+
+                    {allData.length > 0 &&
+                        allData.map(product => (
+                            <ClothItem key={product.id} {...product} />
+                        ))}
                 </div>
             </Preview>
 
             <Preview path={'best_seller=1'} title="top selling">
-                <div className="flex flex-wrap justify-center gap-4 mb-10">
-                    {best.map(product => (
-                        <ClothItem key={product.id} {...product} />
-                    ))}
+                <div className="flex flex-wrap justify-center gap-4 mb-10 min-h-[20vh] relative">
+                    {best.length == 0 && (
+                        <Loader
+                            style="bg-transparent"
+                            childStyle=" justify-center items-center"></Loader>
+                    )}
+
+                    {best.length > 0 &&
+                        best.map(product => (
+                            <ClothItem key={product.id} {...product} />
+                        ))}
                 </div>
             </Preview>
             <Browse />
