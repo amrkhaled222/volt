@@ -16,6 +16,8 @@ function CategoryPage(props) {
     let search = props.searchParams
     let title = ''
 
+    
+
     const [allData, setAllData] = useState({})
     const [loader, setLoader] = useState(true)
     const [page, setPage] = useState(1)
@@ -33,7 +35,7 @@ function CategoryPage(props) {
                 )
                 .then(res => {
                     setAllData(res.data.products)
-                    console.log(res.data)
+                   
                     setLoader(false)
                 })
         } catch (err) {

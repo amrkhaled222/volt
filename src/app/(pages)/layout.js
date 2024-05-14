@@ -93,7 +93,7 @@ export default function RootLayout({ children }) {
                                         ? ` ${transitionin} `
                                         : ` ${transitionout}`
                                 } flex flex-col  top-24 md:top-[110px]  right-4 text-black  z-20 p-4 rounded-md text-sm w-1/2   lg:gap-4 gap-2  `}>
-                                <h2 className=" font-semibold text-xl capitalize  p-1">
+                                <h2 className=" font-semibold text-xl    capitalize  p-1">
                                     {user?.user?.name}
                                 </h2>
 

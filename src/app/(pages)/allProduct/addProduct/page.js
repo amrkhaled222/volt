@@ -2,8 +2,7 @@
 import Form from '@/app/_components/Form'
 import Dropzone from '@/app/_components/Dropzone'
 import { useEffect, useState } from 'react'
-import RejectedImage from '@/app/_components/RejectedImage'
-import AcceptedImage from '@/app/_components/AcceptedImage'
+
 import ImagePreview from '@/app/_components/ImagePreview'
 import Image from 'next/image'
 import removeIcon from '@/app/_assets/remove.png'
@@ -42,7 +41,7 @@ function ProductDetails(props) {
     }
 
     //remove uploaded Image
-    console.log(formData)
+
     const takepic = inputPic => {
         setFormData(e => {
             return { ...e, picture: inputPic }

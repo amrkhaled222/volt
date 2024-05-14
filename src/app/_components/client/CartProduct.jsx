@@ -10,33 +10,25 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
     const [q, setq] = useState(quantity)
     const fetchProduct = async () => {
         try {
-            await axios
-                .get(
-                    `api/product/${productid}`,
-                )
-                .then(res => {
-                    console.log(res.data.product)
-                    setProduct(res.data.product)
-                })
+            await axios.get(`api/product/${productid}`).then(res => {
+                setProduct(res.data.product)
+            })
         } catch (err) {
             throw new Error(err)
         }
     }
     useEffect(() => {
-      fetchProduct()
+        fetchProduct()
     }, [q])
-    async function  handleAdd() {
+    async function handleAdd() {
         try {
             await axios
-                .post(
-                    `api/cart/add/${productid}`,{
-                        'quantity': 1
-                    }
-                )
+                .post(`api/cart/add/${productid}`, {
+                    quantity: 1,
+                })
                 .then(res => {
-                    setq((e)=> e+1)
-                    changeTotal(e=>e+product.price)
-                    console.log(res)
+                    setq(e => e + 1)
+                    changeTotal(e => e + product.price)
                 })
         } catch (err) {
             throw new Error(err)
@@ -46,15 +38,12 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
     async function handleMinus() {
         try {
             await axios
-                .post(
-                    `api/cart/remove/${productid}`,{
-                        'quantity': 1
-                    }
-                )
+                .post(`api/cart/remove/${productid}`, {
+                    quantity: 1,
+                })
                 .then(res => {
-                    changeTotal(e=>e-product.price)
-                    setq(e => e-1)
-                    console.log(res)
+                    changeTotal(e => e - product.price)
+                    setq(e => e - 1)
                 })
         } catch (err) {
             throw new Error(err)
@@ -63,22 +52,19 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
     async function handleDelete() {
         try {
             await axios
-                .post(
-                    `api/cart/remove/${productid}`,{
-                        'quantity': q
-                    }
-                )
+                .post(`api/cart/remove/${productid}`, {
+                    quantity: q,
+                })
                 .then(res => {
-                    changeTotal(e=>e - product.price * q)
+                    changeTotal(e => e - product.price * q)
                     setq(0)
-                    console.log(res)
                 })
         } catch (err) {
             throw new Error(err)
         }
     }
     if (q == 0) {
-        changeCart(e=> e.filter(e => e.product_id==productid))
+        changeCart(e => e.filter(e => e.product_id == productid))
     }
     return (
         <>
@@ -87,8 +73,8 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
                     <Image
                         src={product.picture}
                         alt={product.title}
-                        height='124'
-                        width='124'
+                        height="124"
+                        width="124"
                         className=" w-[99px] h-[99px] md:h-[124px] md:w-[124px]"
                     />
                 </div>
@@ -99,7 +85,11 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
                         </h5>
                         <div className=" w-6 h-6">
                             <button>
-                                <Image onClick={handleDelete} src={deleteIcon} alt="" />
+                                <Image
+                                    onClick={handleDelete}
+                                    src={deleteIcon}
+                                    alt=""
+                                />
                             </button>
                         </div>
                     </div>
