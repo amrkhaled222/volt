@@ -10,19 +10,14 @@ import { useState, useEffect } from 'react'
 import axios from '@/lib/axios'
 
 function ItemPage(props) {
-
     const [product, setProduct] = useState([])
-    const [similar,setSimilar] = useState([])
+    const [similar, setSimilar] = useState([])
 
     const fetchAllData = async () => {
         try {
-            await axios
-                .get(
-                    `api/product`,
-                )
-                .then(res => {
-                    setSimilar(res.data.products.data.slice(0,3))
-                })
+            await axios.get(`api/product`).then(res => {
+                setSimilar(res.data.products.data.slice(0, 3))
+            })
         } catch (err) {
             throw new Error(err)
         }
@@ -50,7 +45,8 @@ function ItemPage(props) {
                     <Nav />
                 </div>
             </header>
-            <ItemPreview product = {product}/>
+
+            <ItemPreview product={product} />
 
             <Preview title="You might also like">
                 <div className="flex flex-wrap justify-center gap-4 mb-10">

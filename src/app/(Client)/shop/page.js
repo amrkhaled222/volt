@@ -16,6 +16,8 @@ function CategoryPage(props) {
     let search = props.searchParams
     let title = ''
 
+    console.log()
+
     const [allData, setAllData] = useState({})
     const [loader, setLoader] = useState(true)
     const [page, setPage] = useState(1)
