@@ -9,6 +9,7 @@ export default function OrderList() {
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState({})
     const [loader, setLoader] = useState(true)
+
     const getAllOrder = async () => {
         setLoader(true)
         await axios.get(`api/order?page=${currentPage}`).then(res => {
@@ -17,6 +18,7 @@ export default function OrderList() {
             setLoader(false)
         })
     }
+
     useEffect(() => {
         getAllOrder()
     }, [currentPage])

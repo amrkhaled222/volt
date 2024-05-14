@@ -32,7 +32,7 @@ export default function AllProduct() {
                 <Loader></Loader>
             ) : (
                 <div>
-                    <div className="grid md:grid-cols-autoFlow grid-cols-autoFlowMobile grid-rows-allproduct_row gap-4 justify-evenly min-h-[80vh]">
+                    <div className="grid md:grid-cols-autoFlow grid-cols-autoFlowMobile gap-4 justify-evenly min-h-[80vh]">
                         {product.data.map((e, i) => {
                             return <Product {...e} key={e.id}></Product>
                         })}

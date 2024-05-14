@@ -40,7 +40,6 @@ module.exports = {
                 search: "url('./_assets/magnifying-glass.png')",
             },
             gridTemplateColumns: {
-                // added new 4 column grid as new4
                 table: 'repeat(1, minmax(0, 1fr))',
                 orderStats: ' repeat(auto-fill, minmax(240px, 340px));',
                 autoFlow: ' repeat(auto-fill, minmax(280px, 370px));',
@@ -50,8 +49,7 @@ module.exports = {
             gridTemplateRows: {
                 layout: '100px 1fr',
                 mobilelayout: '76px 1fr',
-
-                allproduct_row: ' repeat(auto-fill, minmax(280px, 300px)) ',
+                allproduct_row: ' repeat(auto-fill, minmax(280px, 280px)) ',
             },
             colors: {
                 border: 'hsl(var(--border))',
