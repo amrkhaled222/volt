@@ -1,3 +1,4 @@
+
 "use state";
 import brownTshirt from "@/app/_assets/brownT-shirt.png";
 import brownTshirtBack from "@/app/_assets/brownT-shirt-back.png";
@@ -21,12 +22,14 @@ function Item({ product }) {
 	const [addtoCart, setAddToCart] = useState();
 	
 
-	let rating = product.rate;
-	let finalRate = Math.floor(rating);
-	let stars = false
-	if (rating){
-		stars = new Array(finalRate).fill(0);
-	}
+
+    let rating = product.rate
+    let finalRate = Math.floor(rating)
+    let stars = false
+    if (rating) {
+        stars = new Array(finalRate).fill(0)
+    }
+
 
 	async function  handleAddToCart() {
 		console.log('add')
@@ -57,61 +60,81 @@ function Item({ product }) {
 		setQuantity((prev) => prev - 1);
 	}
 
-	function handleActive(params) {
-		if (params === "Small") {
-			setActive("Small");
-		} else if (params === "Medium") {
-			setActive("Medium");
-		} else if (params === "Large") {
-			setActive("Large");
-		} else if (params === "X-Large") {
-			setActive("X-Large");
-		}
-	}
+    function handleAdd() {
+        setCounter(prev => prev + 1)
+    }
+
+    function handleMinus() {
+        setCounter(prev => prev - 1)
+    }
+
+
+    function handleActive(params) {
+        if (params === 'Small') {
+            setActive('Small')
+        } else if (params === 'Medium') {
+            setActive('Medium')
+        } else if (params === 'Large') {
+            setActive('Large')
+        } else if (params === 'X-Large') {
+            setActive('X-Large')
+        }
+    }
+
 
 	// localStorage.setItem("cart", JSON.stringify(cart));
 
-	return (
-		<section className=" mt-7">
-			<div className=" container px-4 m-auto max-w-7xl">
-				<div className="flex flex-col md:flex-row gap-8">
-					<div className="flex flex-col md:flex-row gap-3">
+    function handleAddToCart() {
+        cart.push(x)
+        setAddToCart(cart)
+    }
 
-						<div className=" h-full order-1 md:order-2">
-							<Image
-								src={product.picture}
-								height={500}
-								width={350}
-								alt=""
-								className="h-[500px] w-[350px]"
-							/>
-						</div>
-					</div>
+    localStorage.setItem('cart', JSON.stringify(cart))
 
-					<div>
-						<h3 className=" font-montserrat font-semibold text-3xl">
-							{product.title}
-						</h3>
-						<div className=" flex gap-5 my-5">
-							<div className=" flex gap-2">
-								{stars && stars.map((st, i) => (
-									<Image
-										src={star}
-										key={i}
-										className="h-4 w-4 "
-										alt="Customer Rating"
-									/>
-								))}
-							</div>
-							<p className=" font-plusj ">{product.rating}</p>
-						</div>
-						<div className="my-5">
-							<p className="font-plusj font-bold text-2xl">{`${product.price}`} LE</p>
-						</div>
-						<p className=" font-plusj text-sm text-gray-500 mb-4">
-							{product.description}
-						</p>
-						{/* <hr className="h-1 bg-hrColor" />
+
+    return (
+        <section className=" mt-7">
+            <div className=" container px-4 m-auto max-w-7xl">
+                <div className="flex flex-col md:flex-row gap-8">
+                    <div className="flex flex-col md:flex-row gap-3">
+                        <div className=" h-full order-1 md:order-2">
+                            <Image
+                                src={product.picture}
+                                height={500}
+                                width={350}
+                                alt=""
+                                className="max-h-[350px] max-w-[350px]"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className=" font-montserrat font-semibold text-3xl">
+                            {product.title}
+                        </h3>
+                        <div className=" flex gap-5 my-5">
+                            <div className=" flex gap-2">
+                                {stars &&
+                                    stars.map((st, i) => (
+                                        <Image
+                                            src={star}
+                                            key={i}
+                                            className="h-4 w-4 "
+                                            alt="Customer Rating"
+                                        />
+                                    ))}
+                            </div>
+                            <p className=" font-plusj ">{product.rating}</p>
+                        </div>
+                        <div className="my-5">
+                            <p className="font-plusj font-bold text-2xl">
+                                {`${product.price}`} LE
+                            </p>
+                        </div>
+                        <p className=" font-plusj text-sm text-gray-500 mb-4">
+                            {product.description}
+                        </p>
+                        {/* <hr className="h-1 bg-hrColor" />
 						<div className=" my-5">
 							<p className="mb-2 font-plusj text-gray-500 text-lg">
 								Select Colors
@@ -175,6 +198,7 @@ function Item({ product }) {
 								</div>
 							</div>
 						</div> */}
+
 						<hr className="h-1 bg-hrColor" />
 						<div className=" flex gap-6 mt-5">
 							<div className=" flex w-[30%] bg-main_gray px-4 justify-between rounded-3xl text-sm md:text-base  p-1 border-2 border-solid font-plusj">
@@ -212,5 +236,6 @@ function Item({ product }) {
 			<ItemInfo />
 		</section>
 	);
+
 }
-export default Item;
+export default Item

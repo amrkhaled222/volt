@@ -67,17 +67,7 @@ function ProductDetails(props) {
 
     //remove uploaded Image
 
-    const removeImage = () => {
-        setFormData(e => {
-            return { ...e, picture: '' }
-        })
-    }
     // remove rejected Image
-
-    const removeRejected = name => {
-        setRejected(files => files.filter(({ file }) => file.name !== name))
-    }
-    ///handle input
 
     const handleFormdata = e => {
         const { name, value } = e.target
@@ -106,10 +96,9 @@ function ProductDetails(props) {
         setquery('delete')
     }
 
-    const takepic=(inputPic)=>{
-        setFormData((e)=>{
-            return {...e,
-                    picture:inputPic}
+    const takepic = inputPic => {
+        setFormData(e => {
+            return { ...e, picture: inputPic }
         })
     }
 
@@ -192,10 +181,8 @@ function ProductDetails(props) {
                         {' '}
                         product gallery
                     </h2>
-                    <Dropzone 
-                      handleFormChange={takepic}
-                    />
-                    
+                    <Dropzone handleFormChange={takepic} />
+
                     <div className="flex  md:justify-between justify-center  flex-col md:flex-row gap-2 ">
                         <div className=" md:basis-[66%] flex gap-2  justify-between flex-col md:flex-row  ">
                             <button
