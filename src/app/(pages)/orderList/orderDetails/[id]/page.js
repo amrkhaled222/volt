@@ -1,9 +1,7 @@
 'use client'
-
 import { opensans } from '@/font'
 import Image from 'next/image'
 import calendarIcon from '@/app/_assets/calendar.png'
-
 import dropIcon from '@/app/_assets/downArrowNonActive.png'
 import { useEffect, useState } from 'react'
 import Loader from '@/app/_components/Loader'

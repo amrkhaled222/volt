@@ -1,20 +1,20 @@
-
-"use state";
-import brownTshirt from "@/app/_assets/brownT-shirt.png";
-import brownTshirtBack from "@/app/_assets/brownT-shirt-back.png";
-import brownTshirtModel from "@/app/_assets/brownT-shirt-model.png";
-import star from "@/app/_assets/star.png";
-import Plus from "@/app/_assets/plusIcon.svg";
-import Minus from "@/app/_assets/MinusIcon.svg";
-import Button from "./Button";
-import ItemInfo from "./ItemInfo";
-import { useState } from "react";
-import SizeButton from "./SizeButton";
-import Image from "next/image";
-import { useAuth } from "@/hooks/auth";
-import axios from "@/lib/axios";
-let cart = new Array();
+'use state'
+import brownTshirt from '@/app/_assets/brownT-shirt.png'
+import brownTshirtBack from '@/app/_assets/brownT-shirt-back.png'
+import brownTshirtModel from '@/app/_assets/brownT-shirt-model.png'
+import star from '@/app/_assets/star.png'
+import Plus from '@/app/_assets/plusIcon.svg'
+import Minus from '@/app/_assets/MinusIcon.svg'
+import Button from './Button'
+import ItemInfo from './ItemInfo'
+import { useState } from 'react'
+import SizeButton from './SizeButton'
+import Image from 'next/image'
+import { useAuth } from '@/hooks/auth'
+import axios from '@/lib/axios'
+let cart = new Array()
 function Item({ product }) {
+
 	const [counter, setCounter] = useState(1);
 	const {user} = useAuth()
 	const [quantity, setQuantity] = useState(1)
@@ -68,6 +68,7 @@ function Item({ product }) {
             setActive('X-Large')
         }
     }
+
 
     return (
         <section className=" mt-7">
@@ -175,6 +176,7 @@ function Item({ product }) {
 								</div>
 							</div>
 						</div> */}
+
 						<hr className="h-1 bg-hrColor" />
 						<div className=" flex gap-6 mt-5">
 							<div className=" flex w-[30%] bg-main_gray px-4 justify-between rounded-3xl text-sm md:text-base  p-1 border-2 border-solid font-plusj">
@@ -212,5 +214,6 @@ function Item({ product }) {
 			<ItemInfo />
 		</section>
 	);
+
 }
 export default Item;
