@@ -57,4 +57,17 @@ const validateForm = formData => {
     return { state: true, problem: '' }
 }
 
-export { updateData, DeleteProduct, validateForm, sendData }
+const editOrderState = async (id, setloader, setupdated, data) => {
+    try {
+        setloader(true)
+        axios.put(`/api/order/${id}`, data).then(res => {
+            if (res.status) {
+                setloader(false)
+                setupdated(true)
+            }
+        })
+    } catch (err) {
+        throw new Error(err)
+    }
+}
+export { updateData, DeleteProduct, validateForm, sendData, editOrderState }
