@@ -35,8 +35,8 @@ export default function Dashboard() {
             {!loader && (
                 <>
                     <div className="flex gap-3 justify-evenly flex-wrap">
-                        {Object.keys(data).map((e, i) => {
-                            return <Stats {...data[e]} key={i * 5}></Stats>
+                        {stats.map((s, i) => {
+                            return <Stats stat={s} key={i * 5} {...data}></Stats>
                         })}
                     </div>
                     <Table

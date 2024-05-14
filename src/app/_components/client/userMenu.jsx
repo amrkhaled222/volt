@@ -47,9 +47,11 @@ export default function UserMenu() {
                 onClick={() => {
                     handleUserMenu()
                 }}
+                width={20}
+                height={20}
                 alt="profile"
-                src={user?.user?.img ? user.user.img : profile}
-                className=" w-5 hover:cursor-pointer"></Image>
+                src={user?.user?.image ? user.user.image : profile}
+                className=" w-5 hover:cursor-pointer rounded-[50%]"></Image>
 
             <div
                 className={`w-[230px] shadow-lg absolute bg-white duration-500 ease-in-out  ${

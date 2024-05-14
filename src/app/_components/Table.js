@@ -18,7 +18,7 @@ function Table({ header, data }) {
                                 Date
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Customer Name
+                                Customer ID
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Status
