@@ -10,11 +10,16 @@ import ItemInfo from "./ItemInfo";
 import { useState } from "react";
 import SizeButton from "./SizeButton";
 import Image from "next/image";
+import { useAuth } from "@/hooks/auth";
+import axios from "@/lib/axios";
 let cart = new Array();
 function Item({ product }) {
 	const [counter, setCounter] = useState(1);
+	const {user} = useAuth()
+	const [quantity, setQuantity] = useState(1)
 	const [Active, setActive] = useState("Small");
 	const [addtoCart, setAddToCart] = useState();
+	
 
 	let rating = product.rate;
 	let finalRate = Math.floor(rating);
@@ -23,12 +28,33 @@ function Item({ product }) {
 		stars = new Array(finalRate).fill(0);
 	}
 
+	async function  handleAddToCart() {
+		console.log('add')
+		if(user){
+			try {
+				await axios
+					.post(
+						`api/cart/add/${product.id}`,{
+							'quantity': quantity
+						}
+					)
+					.then(res => {
+						console.log(res)
+					})
+			} catch (err) {
+				throw new Error(err)
+			}
+		} else {
+		    setAddToCart();
+		}
+    }
+
 	function handleAdd() {
-		setCounter((prev) => prev + 1);
+		setQuantity((prev) => prev + 1);
 	}
 
 	function handleMinus() {
-		setCounter((prev) => prev - 1);
+		setQuantity((prev) => prev - 1);
 	}
 
 	function handleActive(params) {
@@ -43,12 +69,7 @@ function Item({ product }) {
 		}
 	}
 
-	function handleAddToCart() {
-		cart.push(x);
-		setAddToCart(cart);
-	}
-
-	localStorage.setItem("cart", JSON.stringify(cart));
+	// localStorage.setItem("cart", JSON.stringify(cart));
 
 	return (
 		<section className=" mt-7">
@@ -164,7 +185,7 @@ function Item({ product }) {
 										onClick={handleMinus}
 									/>
 								</button>
-								<p className=" font-plusj text-lg">{counter}</p>
+								<p className=" font-plusj text-lg">{quantity}</p>
 								<button
 									className="font-bold"
 									onClick={handleAdd}>
