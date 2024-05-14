@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 "use state";
 import brownTshirt from "@/app/_assets/brownT-shirt.png";
 import brownTshirtBack from "@/app/_assets/brownT-shirt-back.png";
@@ -20,6 +24,10 @@ function Item({ product }) {
 	const [Active, setActive] = useState("Small");
 	const [addtoCart, setAddToCart] = useState();
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 
 	let rating = product.rate;
 	let finalRate = Math.floor(rating);
@@ -28,6 +36,10 @@ function Item({ product }) {
 		stars = new Array(finalRate).fill(0);
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 	async function  handleAddToCart() {
 		console.log('add')
 		if(user){
@@ -56,6 +68,18 @@ function Item({ product }) {
 	function handleMinus() {
 		setQuantity((prev) => prev - 1);
 	}
+<<<<<<< HEAD
+=======
+
+    function handleAdd() {
+        setCounter(prev => prev + 1)
+    }
+
+    function handleMinus() {
+        setCounter(prev => prev - 1)
+    }
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 
     function handleActive(params) {
         if (params === 'Small') {
@@ -69,7 +93,20 @@ function Item({ product }) {
         }
     }
 
+<<<<<<< HEAD
 	// localStorage.setItem("cart", JSON.stringify(cart));
+=======
+
+	// localStorage.setItem("cart", JSON.stringify(cart));
+
+    function handleAddToCart() {
+        cart.push(x)
+        setAddToCart(cart)
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart))
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 
     return (
         <section className=" mt-7">
@@ -177,6 +214,10 @@ function Item({ product }) {
 								</div>
 							</div>
 						</div> */}
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 						<hr className="h-1 bg-hrColor" />
 						<div className=" flex gap-6 mt-5">
 							<div className=" flex w-[30%] bg-main_gray px-4 justify-between rounded-3xl text-sm md:text-base  p-1 border-2 border-solid font-plusj">
@@ -214,5 +255,9 @@ function Item({ product }) {
 			<ItemInfo />
 		</section>
 	);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1483f3cf58f09f61f2e6b8c987ff438df07a61c
 }
 export default Item
