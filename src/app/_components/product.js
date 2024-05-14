@@ -19,10 +19,10 @@ function Product(props) {
                     <div className="flex flex-col gap-1">
                         <h2 className={` capitalize`}>{props.title}</h2>
                         <span className=" text-seconderyItemColor text-sm">
-                            {props.category_id == '1' && 'casual'}
-                            {props.category_id == '2' && 'party'}
-                            {props.category_id == '3' && 'formal'}
-                            {props.category_id == '4' && 'sport'}
+                            {props.category_id == '1' && 'Casual'}
+                            {props.category_id == '4' && 'Party'}
+                            {props.category_id == '2' && 'Formal'}
+                            {props.category_id == '3' && 'Sport'}
                         </span>
                     </div>
                     <div
@@ -39,7 +39,7 @@ function Product(props) {
             </div>
             <div>
                 <h3 className=" font-semibold"> summary</h3>
-                <p className=" text-seconderyItemColor">{props.description}</p>
+                <p className=" text-seconderyItemColor truncate">{props.description}</p>
             </div>
         </Link>
     )

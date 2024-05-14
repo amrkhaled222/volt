@@ -51,9 +51,9 @@ function CategoryPage(props) {
             title = 'casual'
         } else if (search.category_id == '2') {
             title = 'formal'
-        } else if (search.category_id == '3') {
-            title = 'party'
         } else if (search.category_id == '4') {
+            title = 'party'
+        } else if (search.category_id == '3') {
             title = 'gym'
         }
     } else if (search?.best_seller) {
@@ -63,7 +63,7 @@ function CategoryPage(props) {
     }
     useEffect(() => {
         fetchAllData()
-    }, [page, search])
+    }, [page,search])
 
     function handleDisplay() {
         setDisplay(!display)

@@ -69,13 +69,13 @@ function Filter() {
                     </li>
                     <li
                         onClick={() => {
-                            filterFunc('category_id=3')
+                            filterFunc('category_id=4')
                         }}>
                         <FilterButton title="Party" />
                     </li>
                     <li
                         onClick={() => {
-                            filterFunc('category_id=4')
+                            filterFunc('category_id=3')
                         }}>
                         <FilterButton title="Gym" />
                     </li>
