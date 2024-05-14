@@ -26,7 +26,7 @@ export default function Dashboard() {
         })
     }
     useEffect(() => {
-        getStats()
+        // getStats()
         getRecentOrder()
     }, [])
     return (
