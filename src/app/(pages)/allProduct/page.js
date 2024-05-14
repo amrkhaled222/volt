@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import Loader from '@/app/_components/Loader'
 import axios from '@/lib/axios'
-import { useSearchParams } from 'next/navigation'
 export default function AllProduct() {
-    let searchParam = useSearchParams()
     const [product, setProduct] = useState({})
     const [loader, setLoader] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)

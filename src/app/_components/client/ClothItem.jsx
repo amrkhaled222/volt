@@ -13,7 +13,7 @@ function ClothItem({ ...props }) {
     return (
         <Link
             href={`/product/${props.id}`}
-            className=" cursor-pointer hover:scale-95 duration-300"
+            className=" cursor-pointer shadow-sm rounded-lg p-4 hover:scale-95 duration-300"
             key={props.id}>
             <div className=" mb-3">
                 <Image
@@ -21,11 +21,11 @@ function ClothItem({ ...props }) {
                     width={300}
                     height={400}
                     alt={props.title}
-                    className='h-[400px]'
+                    className="max-h-[300px] rounded-md"
                 />
             </div>
 
-            <h3 className=" font-plusj font-bold text-sm mb-2 truncate">
+            <h3 className=" font-plusj font-bold text-xl mb-2 truncate">
                 {props.title}
             </h3>
 
@@ -43,17 +43,8 @@ function ClothItem({ ...props }) {
 
                 <p className="font-plusj font-bold text-sm">{props.rating}</p>
             </div>
-            {props.discount ? (
-                <p className=" flex gap-3 font-plusj font-bold text-lg">
-                    {`$${props.price * [props.discount / 100]}`}
-                    <span className=" font-plusj font-bold text-sm block  text-gray-500 line-through">{`$${props.price}`}</span>
-                    <span className=" text-center text-[10px] block w-8  text-discountColor p-1 rounded-xl  ">
-                        {`-${props.discount}%`}
-                    </span>
-                </p>
-            ) : (
-                <p className=" font-plusj font-bold text-sm">{`$${props.price}`}</p>
-            )}
+
+            <p className=" font-plusj  text-seconderyItemColor  text-sm">{`$${props.price}`}</p>
         </Link>
     )
 }

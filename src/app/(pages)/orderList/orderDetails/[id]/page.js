@@ -61,14 +61,11 @@ export default function OrderDetails(props) {
     }, [updated])
 
     useEffect(() => {
-        console.log('inside')
-
         if (
             query != '' &&
             orderState != 'change status' &&
             orderData.order.status !== orderState
         ) {
-            console.log('hereeeee')
             editOrderState(orderData.order.id, setLoader, setUpdated, {
                 user_id: orderData.user.id,
                 total_price: orderData.order.total_price,

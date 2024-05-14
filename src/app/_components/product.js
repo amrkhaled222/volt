@@ -7,10 +7,10 @@ function Product(props) {
     return (
         <Link
             href={`allProduct/productDetails/${props.id}`}
-            className={`flex flex-col bg-[rgb(250,250,250)] rounded-2xl gap-3 ${opensans.className} p-4 hover:scale-95 duration-300 `}>
+            className={`flex flex-col bg-[rgb(250,250,250)] rounded-2xl gap-3 ${opensans.className} p-6 hover:scale-95 duration-300 `}>
             <div className="flex gap-3">
                 <Image
-                    className="w-22 h-22"
+                    className="w-22 h-22 rounded-lg"
                     width={84}
                     height={84}
                     src={props.picture}
@@ -39,7 +39,9 @@ function Product(props) {
             </div>
             <div>
                 <h3 className=" font-semibold"> summary</h3>
-                <p className=" text-seconderyItemColor truncate">{props.description}</p>
+                <p className=" text-seconderyItemColor truncate">
+                    {props.description}
+                </p>
             </div>
         </Link>
     )

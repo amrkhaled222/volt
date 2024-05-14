@@ -20,17 +20,11 @@ function CategoryPage(props) {
     const [loader, setLoader] = useState(true)
     const [page, setPage] = useState(1)
     const [display, setDisplay] = useState(false)
-    console.log(allData)
 
-    console.log(
-        `api/product?${Object.keys(search).map(e => {
-            return `${e}=${search[e]}`
-        })}&page=${page} `,
-    )
     const fetchAllData = async () => {
         try {
             setLoader(true)
-            setPage(1)
+
             await axios
                 .get(
                     `api/product?${Object.keys(search).map(e => {
@@ -39,6 +33,7 @@ function CategoryPage(props) {
                 )
                 .then(res => {
                     setAllData(res.data.products)
+                    console.log(res.data)
                     setLoader(false)
                 })
         } catch (err) {
@@ -61,9 +56,15 @@ function CategoryPage(props) {
     } else {
         title = 'shop'
     }
+
     useEffect(() => {
         fetchAllData()
-    }, [page,search])
+    }, [page])
+
+    useEffect(() => {
+        setPage(1)
+        fetchAllData()
+    }, [search])
 
     function handleDisplay() {
         setDisplay(!display)
@@ -109,7 +110,7 @@ function CategoryPage(props) {
                                     </h2>
                                 </div>
                             )}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 relative md:grid-cols-3 xl:grid-cols-3 gap-4 min-h-[70vh] min-w-[80%]">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 relative md:grid-cols-3 xl:grid-cols-3 gap-7 min-h-[70vh] min-w-[80%]">
                                 {loader && (
                                     <Loader style="min-h-[100%] bg-transparent absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 "></Loader>
                                 )}
