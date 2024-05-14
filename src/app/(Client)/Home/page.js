@@ -16,11 +16,47 @@ import ClothItem from '@/app/_components/client/ClothItem.jsx'
 import { products } from '@/app/_components/client/products.js'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from '@/lib/axios'
 
 function Home() {
     let router = useRouter()
-    const productsSample = products.slice(0, 4)
+    const [allData, setAllData] = useState([])
+    const [best, setBest] = useState([])
+
+    const fetchAllData = async () => {
+        try {
+            await axios
+                .get(
+                    `api/product`,
+                )
+                .then(res => {
+                    setAllData(res.data.products.data.slice(0,3))
+                })
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+    useEffect(() => {
+        fetchAllData()
+    }, [])
+    const fetchBestData = async () => {
+        try {
+            await axios
+                .get(
+                    `api/product?best_seller=1`,
+                )
+                .then(res => {
+                    setBest(res.data.products.data.slice(0,4))
+                })
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+    useEffect(() => {
+        fetchAllData()
+        fetchBestData()
+    }, [])
 
     return (
         <main>
@@ -29,7 +65,7 @@ function Home() {
                 <Nav />
             </div>
             <header className="bg-main_gray  bg-MainModels  md:bg-pcMainModels bg-bottom md:bg-[center_right_-8rem] xl:bg-right   bg-no-repeat bg-[length:500px_600px] md:bg-cover xl:bg-cover">
-                <div className="container px-4 m-auto max-w-7xl md:pt-0 pt-8">
+                <div className="container px-4 m-auto md:pt-0 pt-8">
                     <div className=" h-[120vh] md:h-fit md:pt-20  relative">
                         <div>
                             <h1 className=" font-extrabold font-montserrat text-4xl  md:text-3xl  lg:text-5xl    xl:text-6xl mb-10 md:max-w-[450px] lg:max-w-[500px] ">
@@ -130,7 +166,7 @@ function Home() {
 
             <Preview path={'latest=1'} title="new arrivals">
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
-                    {productsSample.map(product => (
+                    {allData.map(product => (
                         <ClothItem key={product.id} {...product} />
                     ))}
                 </div>
@@ -138,7 +174,7 @@ function Home() {
 
             <Preview path={'best_seller=1'} title="top selling">
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
-                    {productsSample.map(product => (
+                    {best.map(product => (
                         <ClothItem key={product.id} {...product} />
                     ))}
                 </div>
