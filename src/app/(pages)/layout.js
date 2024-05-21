@@ -15,8 +15,11 @@ import { redirect } from 'next/navigation'
 import { useAuth } from '@/hooks/auth'
 import StoreIcon from '@/app/_assets/grocery-store.png'
 export default function RootLayout({ children }) {
+    //get user data
     const user = useAuth()
+    //use route
     let router = useRouter()
+    //redirect unauthorized user
     useLayoutEffect(() => {
         if (!user?.user?.is_admin) {
             redirect('/Home')

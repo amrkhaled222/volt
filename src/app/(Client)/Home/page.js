@@ -19,22 +19,23 @@ import { useState, useEffect } from 'react'
 import axios from '@/lib/axios'
 import Loader from '@/app/_components/Loader'
 function Home() {
+    // to change route
     let router = useRouter()
-    const [allData, setAllData] = useState([])
+
+    const [latest, setLatest] = useState([])
+    //get BestSeller
     const [best, setBest] = useState([])
 
-    const fetchAllData = async () => {
+    const fetchLatest = async () => {
         try {
             await axios.get(`api/product`).then(res => {
-                setAllData(res.data.products.data.slice(0, 3))
+                setLatest(res.data.products.data.slice(0, 3))
             })
         } catch (err) {
             throw new Error(err)
         }
     }
-    useEffect(() => {
-        fetchAllData()
-    }, [])
+
     const fetchBestData = async () => {
         try {
             await axios.get(`api/product?best_seller=1`).then(res => {
@@ -45,7 +46,7 @@ function Home() {
         }
     }
     useEffect(() => {
-        fetchAllData()
+        fetchLatest()
         fetchBestData()
     }, [])
 
@@ -157,14 +158,14 @@ function Home() {
 
             <Preview path={'latest=1'} title="new arrivals">
                 <div className="flex flex-wrap justify-center gap-4 mb-10  min-h-[20vh] relative w-full">
-                    {allData.length == 0 && (
+                    {latest.length == 0 && (
                         <Loader
                             style=" bg-transparent"
                             childStyle=" justify-center items-center"></Loader>
                     )}
 
-                    {allData.length > 0 &&
-                        allData.map(product => (
+                    {latest.length > 0 &&
+                        latest.map(product => (
                             <ClothItem key={product.id} {...product} />
                         ))}
                 </div>

@@ -31,7 +31,7 @@ function Browse() {
                         </div>
                         <div
                             onClick={() => {
-                                router.push('shop?category_id=3')
+                                router.push('shop?category_id=4')
                             }}
                             className=" hover:shadow-xl hover:cursor-pointer bg-white rounded-3xl p-9 h-[289px] bg-mobileParty md:bg-party bg-no-repeat bg-cover md:bg-fill bg-right md:col-start-1 md:col-end-3">
                             <h4 className=" uppercase font-plusj font-bold text-3xl">
@@ -40,7 +40,7 @@ function Browse() {
                         </div>
                         <div
                             onClick={() => {
-                                router.push('shop?category_id=4')
+                                router.push('shop?category_id=3')
                             }}
                             className=" hover:shadow-xl hover:cursor-pointer bg-white rounded-3xl p-9 h-[289px] bg-mobileGym md:bg-gym bg-no-repeat bg-cover md:bg-fill bg-right md:col-start-3">
                             <h4 className=" uppercase font-plusj font-bold text-3xl">

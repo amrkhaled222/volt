@@ -12,9 +12,9 @@ import Loader from '@/app/_components/Loader'
 
 function ItemPage(props) {
     const [product, setProduct] = useState({})
-    const [similar, setSimilar] = useState([])
     const [youMightAlsoLike, setYouMight] = useState({})
 
+    //function to get data for you might also like  section
     const youmightalsolike = async () => {
         try {
             await axios.get(`api/product`).then(res => {
@@ -25,15 +25,8 @@ function ItemPage(props) {
         }
     }
 
-    const fetchAllData = async () => {
-        try {
-            await axios.get(`api/product`).then(res => {
-                setSimilar(res.data.products.data.slice(0, 3))
-            })
-        } catch (err) {
-            throw new Error(err)
-        }
-    }
+    // get the product data
+
     const getProductData = async () => {
         try {
             await axios.get(`api/product/${props.params.product}`).then(res => {
@@ -43,9 +36,10 @@ function ItemPage(props) {
             throw new Error(err)
         }
     }
+
+    //fetch data
     useEffect(() => {
         getProductData()
-        fetchAllData()
         youmightalsolike()
     }, [])
     return (

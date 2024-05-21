@@ -19,7 +19,9 @@ function CartPage() {
                 setLoader(false)
             })
         } catch (err) {
-            throw new Error(err)
+            //print for user that dose not have data
+            setLoader(false)
+            setCart('no data found')
         }
     }
     useEffect(() => {
@@ -40,14 +42,24 @@ function CartPage() {
                         Your cart
                     </h2>
 
-                    <div className="relative min-h-[30vh] min-w[100%]">
+                    <div
+                        className={`relative min-h-[30vh] min-w[100%] ${
+                            cart && 'flex items-center justify-center '
+                        }`}>
                         {loader && (
                             <Loader
                                 style="bg-transparent"
                                 childStyle=" justify-center items-center "></Loader>
                         )}
+                        {cart == 'no data found' && (
+                            <div>
+                                <h2 className="text-2xl font-bold capitalize ">
+                                    opps!! there is no data found
+                                </h2>
+                            </div>
+                        )}
 
-                        {!loader && (
+                        {!loader && cart != 'no data found' && (
                             <>
                                 {cart ? (
                                     <Cart
