@@ -2,8 +2,26 @@ import Button from '@/app/_components/client/Button'
 import CartProduct from '@/app/_components/client/CartProduct'
 import cloth from '@/app/_assets/cloth.svg'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import axios from '@/lib/axios'
 
 function Cart({cart, total, changeTotal, changeCart}) {
+    const router = useRouter()
+    const handlePlaceOrder = async () => {
+        try {
+            console.log('place')
+            await axios
+                .post(
+                    `api/order`,
+                )
+                .then(res => {
+                    console.log(res)
+                    router.push('/Home')
+                })
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
 
     return (
         <div className="flex flex-col md:flex-row gap-7 p-4">
@@ -38,6 +56,7 @@ function Cart({cart, total, changeTotal, changeCart}) {
                         pc_width={'w-full'}
                         mobile_width={'w-full'}
                         text_color={'text-white'}
+                        handleClick={handlePlaceOrder}
                     />
                 </div>
             </div>

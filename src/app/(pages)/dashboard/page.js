@@ -9,7 +9,8 @@ import Loader from '@/app/_components/Loader'
 export default function Dashboard() {
     const [allData, setAllData] = useState({})
     const [loader, setLoader] = useState(true)
-
+    const [stats, setStats] = useState([])
+ 
     const getRecentOrder = async () => {
         setLoader(true)
         await axios.get(`api/order`).then(res => {
@@ -18,7 +19,14 @@ export default function Dashboard() {
             setLoader(false)
         })
     }
+    const getStats = async () => {
+        await axios.get('api/stats').then(res=>{
+            console.log(res.data)
+            setStats(res.data)
+        })
+    }
     useEffect(() => {
+        getStats()
         getRecentOrder()
     }, [])
     return (
@@ -27,8 +35,8 @@ export default function Dashboard() {
             {!loader && (
                 <>
                     <div className="flex gap-3 justify-evenly flex-wrap">
-                        {Object.keys(data).map((e, i) => {
-                            return <Stats {...data[e]} key={i * 5}></Stats>
+                        {stats.map((s, i) => {
+                            return <Stats stat={s} key={i * 5} {...data}></Stats>
                         })}
                     </div>
                     <Table

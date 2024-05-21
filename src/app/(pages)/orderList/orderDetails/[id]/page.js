@@ -11,10 +11,12 @@ import DeliveryIcon from '@/app/_assets/cargo-truck.png'
 import CustomerIcon from '@/app/_assets/customer.png'
 import { editOrderState } from '@/app/_components/function'
 import PopUp from '@/app/_components/PopUp'
+import { useRouter } from 'next/navigation'
 export default function OrderDetails(props) {
     const [orderState, setOrderState] = useState('change status')
     const [dropDown, SetDropDown] = useState(false)
     const [loader, setLoader] = useState(true)
+    const router = useRouter()
 
     const [orderData, setOrderData] = useState({
         user: {},
@@ -38,6 +40,16 @@ export default function OrderDetails(props) {
                 }
             })
             setLoader(false)
+        })
+    }
+    const updateOrderData = async () => {
+        console.log('change')
+        axios.put(`api/order/${props.params.id}`,{
+            'status': orderState,
+        }).then(res => {
+            console.log(res)
+            setLoader(false)
+            router.push('/orderList')
         })
     }
 
@@ -151,9 +163,7 @@ export default function OrderDetails(props) {
                                 </div>
 
                                 <button
-                                    onClick={() => {
-                                        setquery('send data')
-                                    }}
+                                    onClick={updateOrderData}
                                     className={
                                         'basis-1/3 bg-mainBg p-4 capitalizeuppercase border rounded-lg  font-medium text-sm hover:scale-95  duration-300'
                                     }>
