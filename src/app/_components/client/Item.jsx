@@ -1,17 +1,17 @@
 'use state'
-import brownTshirt from '@/app/_assets/brownT-shirt.png'
-import brownTshirtBack from '@/app/_assets/brownT-shirt-back.png'
-import brownTshirtModel from '@/app/_assets/brownT-shirt-model.png'
 import star from '@/app/_assets/star.png'
 import Plus from '@/app/_assets/plusIcon.svg'
 import Minus from '@/app/_assets/MinusIcon.svg'
 import Button from './Button'
 import ItemInfo from './ItemInfo'
 import { useState } from 'react'
-import SizeButton from './SizeButton'
 import Image from 'next/image'
 import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
+
+import removeIcon from '@/app/_assets/remove.png'
+
+import PopUp from '../PopUp'
 let cart = new Array()
 function Item({ product }) {
     const [counter, setCounter] = useState(1)
@@ -19,7 +19,9 @@ function Item({ product }) {
     const [quantity, setQuantity] = useState(1)
     const [Active, setActive] = useState('Small')
     const [addtoCart, setAddToCart] = useState()
+    const [err, setErr] = useState(0)
     const [addLoader, setaddLoader] = useState(false)
+
     let rating = product.rate
     let finalRate = Math.floor(rating)
     let stars = false
@@ -42,11 +44,12 @@ function Item({ product }) {
                         setaddLoader(false)
                     })
             } catch (err) {
-                setaddLoader(false)
                 throw new Error(err)
             }
         } else {
-            setAddToCart()
+            setaddLoader(false)
+            setErr(401)
+            console.log(err)
         }
     }
 
@@ -58,30 +61,37 @@ function Item({ product }) {
         setQuantity(prev => prev - 1)
     }
 
-    function handleActive(params) {
-        if (params === 'Small') {
-            setActive('Small')
-        } else if (params === 'Medium') {
-            setActive('Medium')
-        } else if (params === 'Large') {
-            setActive('Large')
-        } else if (params === 'X-Large') {
-            setActive('X-Large')
-        }
-    }
-
     return (
         <section className=" mt-7">
             <div className=" container px-4 m-auto max-w-7xl">
-                <div className="flex flex-col md:flex-row gap-8">
-                    <div className="flex flex-col md:flex-row gap-3">
+                <div className="flex flex-col md:flex-row gap-8 relative rounded-md p-4">
+                    {err == 401 && (
+                        <PopUp
+                            nestChildern={true}
+                            parentClass="rounded-md"
+                            childClass="flex justify-center items-center relative capitalize font-semibold"
+                            childern={
+                                <button
+                                    className="position absolute -top-2 -right-2 "
+                                    onClick={e => {
+                                        setErr(0)
+                                    }}>
+                                    <Image
+                                        className="w-5 h-5"
+                                        alt="close"
+                                        src={removeIcon}></Image>
+                                </button>
+                            }
+                            text={'you should sign in first'}></PopUp>
+                    )}
+                    <div className="flex flex-col md:flex-row gap-3 ">
                         <div className=" h-full order-1 md:order-2">
                             <Image
                                 src={product.picture}
                                 height={500}
                                 width={350}
                                 alt=""
-                                className="max-h-[350px] max-w-[350px]"
+                                className="md:max-h-[350px] md:max-w-[350px] w-full  rounded-md"
                             />
                         </div>
                     </div>
@@ -112,70 +122,6 @@ function Item({ product }) {
                         <p className=" font-plusj text-sm text-gray-500 mb-4">
                             {product.description}
                         </p>
-                        {/* <hr className="h-1 bg-hrColor" />
-						<div className=" my-5">
-							<p className="mb-2 font-plusj text-gray-500 text-lg">
-								Select Colors
-							</p>
-							<div className="flex gap-5">
-								<button className=" w-[37px] h-[37px] rounded-[50%] bg-[#4F4631]"></button>
-								<button className=" w-[37px] h-[37px] rounded-[50%] bg-[#314F4A]"></button>
-								<button className=" w-[37px] h-[37px] rounded-[50%] bg-[#31344F]"></button>
-							</div>
-						</div>
-						<hr className="h-1 bg-hrColor" />
-						<div className="my-5">
-							<p className="mb-2 font-plusj text-gray-500 text-lg">
-								Choose Size
-							</p>
-							<div className="flex gap-4">
-								<div className=" w-[25%]  sm:w-[15%] text-xs sm:text-base">
-									<SizeButton
-										title="Small"
-										bg_color="bg-main_gray"
-										text_color="text-gray-500"
-										mobile_width="w-full"
-										pc_width="w-full"
-										handleActive={() => handleActive("Small")}
-										isActive={Active === "Small"}
-									/>
-								</div>
-								<div className="w-[25%]  sm:w-[15%] text-xs sm:text-base">
-									<SizeButton
-										title="Medium"
-										text_color="text-gray-500"
-										mobile_width="w-full"
-										pc_width="w-full"
-										handleActive={() => handleActive("Medium")}
-										isActive={Active === "Medium"}
-									/>
-								</div>
-
-								<div className="w-[25%]  sm:w-[15%] text-xs sm:text-base">
-									<SizeButton
-										title="Large"
-										bg_color="bg-main_gray"
-										text_color="text-gray-500"
-										mobile_width="w-full"
-										pc_width="w-full"
-										handleActive={() => handleActive("Large")}
-										isActive={Active === "Large"}
-									/>
-								</div>
-
-								<div className="w-[25%]  sm:w-[15%] text-xs sm:text-base">
-									<SizeButton
-										title="X-Large"
-										bg_color="bg-main_gray"
-										text_color="text-gray-500"
-										mobile_width="w-full"
-										pc_width="w-full"
-										handleActive={() => handleActive("X-Large")}
-										isActive={Active === "X-Large"}
-									/>
-								</div>
-							</div>
-						</div> */}
 
                         <hr className="h-1 bg-hrColor" />
                         <div className=" flex gap-6 mt-5">

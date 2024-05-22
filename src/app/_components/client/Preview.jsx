@@ -18,7 +18,7 @@ function Preview({ title, children, path }) {
                         onClick={() => {
                             router.push(`/shop?${path}`)
                         }}
-                        className="rounded-3xl  block p-2 border-2 border-solid font-plusj text-black bg-white w-40">
+                        className="rounded-3xl duration-300 hover:scale-95  block p-2 border-2 border-solid font-plusj text-black bg-white w-40">
                         View All
                     </button>
                 </div>

@@ -2,8 +2,7 @@
 import Form from '@/app/_components/Form'
 import Dropzone from '@/app/_components/Dropzone'
 import { useEffect, useState } from 'react'
-import RejectedImage from '@/app/_components/RejectedImage'
-import AcceptedImage from '@/app/_components/AcceptedImage'
+
 import ImagePreview from '@/app/_components/ImagePreview'
 import StyledButton from '@/app/_components/StyledButton'
 import { useRouter } from 'next/navigation'

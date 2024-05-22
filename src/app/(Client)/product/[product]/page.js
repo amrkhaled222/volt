@@ -5,11 +5,9 @@ import Footer from '@/app/_components/client/Footer'
 import MobileNav from '@/app/_components/client/MobileNav'
 import Nav from '@/app/_components/client/Nav'
 import ClothItem from '@/app/_components/client/ClothItem'
-
 import { useState, useEffect } from 'react'
 import axios from '@/lib/axios'
 import Loader from '@/app/_components/Loader'
-
 function ItemPage(props) {
     const [product, setProduct] = useState({})
     const [youMightAlsoLike, setYouMight] = useState({})
@@ -42,6 +40,7 @@ function ItemPage(props) {
         getProductData()
         youmightalsolike()
     }, [])
+
     return (
         <main>
             <header>

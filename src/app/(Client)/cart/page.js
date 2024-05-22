@@ -13,6 +13,8 @@ function CartPage() {
     const [total, setTotal] = useState(0)
     const [loader, setLoader] = useState(true)
     const [err, setErr] = useState(0)
+    console.log(err)
+
     const fetchCart = async () => {
         try {
             await axios.get(`api/cart`).then(res => {

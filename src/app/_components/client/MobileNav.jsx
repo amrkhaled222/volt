@@ -54,7 +54,7 @@ export default function MobileNav() {
                     onClick={() => {
                         router.push('./Home')
                     }}
-                    className="  text-3xl font-bold">
+                    className="  text-3xl font-bold hover:scale-95 duration-300 ">
                     {' '}
                     Volt
                 </h1>
