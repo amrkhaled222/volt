@@ -9,7 +9,7 @@ import { sendData } from '@/app/_components/function'
 import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 function Profile() {
-    const user = useAuth()
+    const { user } = useAuth()
     const [formData, setFormData] = useState({
         address: '',
         country: '',
@@ -22,12 +22,15 @@ function Profile() {
     const [dataSent, setDataSent] = useState(false)
     const [query, setquery] = useState('')
     const [userData, setUserData] = useState({})
+    const [isAuth, setIsAuth] = useState(false)
     let router = useRouter()
     const changePath = () => {
         router.push('/Home')
     }
 
-    console.log(user.user)
+    if(user && !isAuth){
+        setIsAuth(true)
+    }
     //validate form and show propiate massege
     const handleFormdata = e => {
         const { name, value } = e.target
@@ -38,7 +41,7 @@ function Profile() {
         }))
     }
     const getuserdata = async () => {
-        await axios.get(`/user/contact/${user.user.id}`).then(res => {
+        await axios.get(`/api/user/contact/${user.id}`).then(res => {
             setUserData(res.data)
         })
     }
@@ -68,11 +71,14 @@ function Profile() {
             }, 3000)
         }
     }, [dataSent])
+
     useEffect(() => {
-        if (user?.user?.has_contact) {
+        if (isAuth && user?.has_contact) {
+            console.log(user)
             getuserdata()
         }
-    }, [user])
+    }, [isAuth])
+
     console.log(userData)
     let containerStyle = 'flex flex-col gap-3 '
     let labelStyle = 'text-xl font-medium'
