@@ -70,7 +70,6 @@ function Profile() {
     }, [dataSent])
     useEffect(() => {
         if (user?.user?.has_contact) {
-            console.log(user.user.id)
             getuserdata()
         }
     }, [user])
