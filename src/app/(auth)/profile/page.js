@@ -6,7 +6,10 @@ import rightArrowIcon from '@/app/_assets/arrow-right-bold 1.svg'
 import Dropzone from '@/app/_components/Dropzone'
 import { useRouter } from 'next/navigation'
 import { sendData } from '@/app/_components/function'
+import { useAuth } from '@/hooks/auth'
+import axios from '@/lib/axios'
 function Profile() {
+    const user = useAuth()
     const [formData, setFormData] = useState({
         address: '',
         country: '',
@@ -18,10 +21,13 @@ function Profile() {
     const [loader, setloader] = useState(false)
     const [dataSent, setDataSent] = useState(false)
     const [query, setquery] = useState('')
+    const [userData, setUserData] = useState({})
     let router = useRouter()
     const changePath = () => {
         router.push('/Home')
     }
+
+    console.log(user.user)
     //validate form and show propiate massege
     const handleFormdata = e => {
         const { name, value } = e.target
@@ -31,10 +37,15 @@ function Profile() {
             [name]: value,
         }))
     }
-    const handleImageChange =(inputPic)=>{
+    const getuserdata = async () => {
+        await axios.get(`/user/contact/${user.user.id}`).then(res => {
+            setUserData(res.data)
+        })
+    }
+    const handleImageChange = inputPic => {
         setFormData(e => ({
             ...e,
-            'image': inputPic
+            image: inputPic,
         }))
     }
     const AddButton = e => {
@@ -57,7 +68,13 @@ function Profile() {
             }, 3000)
         }
     }, [dataSent])
-
+    useEffect(() => {
+        if (user?.user?.has_contact) {
+            console.log(user.user.id)
+            getuserdata()
+        }
+    }, [user])
+    console.log(userData)
     let containerStyle = 'flex flex-col gap-3 '
     let labelStyle = 'text-xl font-medium'
     let inputStyle =
@@ -67,16 +84,16 @@ function Profile() {
         <div className="flex justify-center gap-14  flex-col items-center ">
             <div className="flex justify-center items-center pt-3">
                 <Image
-                    width='60'
-                    height='60'
+                    width="60"
+                    height="60"
                     alt="avatar"
                     className="w-40 h-40 rounded-[50%]"
                     src={formData.image == '' ? avatarIcon : formData.image}
                 />
             </div>
-            <Dropzone 
-                handleFormChange={(e) => handleImageChange(e)}
-                urlPath='api/user/contact/upload'
+            <Dropzone
+                handleFormChange={e => handleImageChange(e)}
+                urlPath="api/user/contact/upload"
             />
             <form
                 onSubmit={AddButton}
@@ -92,7 +109,7 @@ function Profile() {
                         country
                     </label>
                     <input
-                        onChange={(e) => handleFormdata(e)}
+                        onChange={e => handleFormdata(e)}
                         required
                         className={inputStyle}
                         id="country"
@@ -106,7 +123,7 @@ function Profile() {
                         city
                     </label>
                     <input
-                        onChange={(e) => handleFormdata(e)}
+                        onChange={e => handleFormdata(e)}
                         required
                         className={inputStyle}
                         id="city"
@@ -120,7 +137,7 @@ function Profile() {
                         Address
                     </label>
                     <input
-                        onChange={(e) => handleFormdata(e)}
+                        onChange={e => handleFormdata(e)}
                         required
                         className={inputStyle}
                         name="address"
@@ -135,7 +152,7 @@ function Profile() {
                         postal code
                     </label>
                     <input
-                        onChange={(e) => handleFormdata(e)}
+                        onChange={e => handleFormdata(e)}
                         required
                         className={inputStyle}
                         name="postal_code"
@@ -148,7 +165,7 @@ function Profile() {
                         phone number
                     </label>
                     <input
-                        onChange={(e) => handleFormdata(e)}
+                        onChange={e => handleFormdata(e)}
                         required
                         className={inputStyle}
                         name="phone_number"
@@ -182,7 +199,6 @@ function Profile() {
                     )}
                 </button>
             </form>
-
         </div>
     )
 }

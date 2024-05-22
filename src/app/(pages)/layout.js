@@ -17,6 +17,7 @@ import StoreIcon from '@/app/_assets/grocery-store.png'
 export default function RootLayout({ children }) {
     //get user data
     const user = useAuth()
+
     //use route
     let router = useRouter()
     //redirect unauthorized user
