@@ -17,7 +17,6 @@ export default function OrderDetails(props) {
     const [dropDown, SetDropDown] = useState(false)
     const [loader, setLoader] = useState(true)
     const router = useRouter()
-
     const [orderData, setOrderData] = useState({
         user: {},
         order: {},
@@ -44,17 +43,20 @@ export default function OrderDetails(props) {
     }
     const updateOrderData = async () => {
         console.log('change')
-        axios.put(`api/order/${props.params.id}`,{
-            'status': orderState,
-        }).then(res => {
-            console.log(res)
-            setLoader(false)
-            router.push('/orderList')
-        })
+        axios
+            .put(`api/order/${props.params.id}`, {
+                status: orderState,
+            })
+            .then(res => {
+                console.log(res)
+                setLoader(false)
+                router.push('/orderList')
+            })
     }
 
     const changeOrderState = e => {
         setOrderState(e)
+        SetDropDown(false)
     }
 
     useEffect(() => {
@@ -105,7 +107,7 @@ export default function OrderDetails(props) {
                                             orderData.status == 'canceld'
                                                 ? 'bg-[#FFA52F] text-black'
                                                 : ' bg-darkBlue text-white'
-                                        } p-2 rounded-xl font-semibold		`}>
+                                        } p-2 rounded-xl font-semibold	capitalize	`}>
                                         {orderData.order.status}
                                     </span>
                                 </div>
@@ -149,7 +151,7 @@ export default function OrderDetails(props) {
                                             ].map(e => {
                                                 return (
                                                     <div
-                                                        className="p-3 rounded-lg  hover:scale-95 duration-300     text-left   "
+                                                        className="p-3 rounded-lg cursor-pointer capitalize  hover:scale-95 duration-300     text-left   "
                                                         key={e}
                                                         onClick={() => {
                                                             changeOrderState(e)

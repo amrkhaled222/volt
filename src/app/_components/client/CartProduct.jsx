@@ -68,17 +68,17 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
     }
     return (
         <>
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-col sm:flex-row">
                 <div>
                     <Image
                         src={product.picture}
                         alt={product.title}
                         height="124"
                         width="124"
-                        className=" w-[99px] h-[99px] md:h-[124px] md:w-[124px]"
+                        className=" sm:w-[99px] sm:h-[99px] md:h-[124px] md:w-[124px] w-full "
                     />
                 </div>
-                <div className="w-[70%]">
+                <div className="sm:w-[70%] w-full">
                     <div className="flex justify-between">
                         <h5 className="mb-1 text-sm md:text-lg font-plusj font-bold">
                             {product.title}

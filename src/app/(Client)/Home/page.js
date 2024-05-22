@@ -72,7 +72,7 @@ function Home() {
                                 onClick={() => {
                                     router.push('/shop')
                                 }}
-                                className="rounded-3xl  block p-2 border-2 border-solid font-plusj w-full md:w-[250px]  bg-black text-white">
+                                className="rounded-3xl cursor-pointer hover:scale-95 duration-300  block p-2 border-2 border-solid font-plusj w-full md:w-[250px]  bg-black text-white">
                                 Shop Now
                             </button>
 

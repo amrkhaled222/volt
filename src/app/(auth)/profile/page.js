@@ -187,6 +187,11 @@ function Profile() {
                 </div> */}
 
                 <button
+                    onClick={e => {
+                        if (loader) {
+                            e.preventDefault()
+                        }
+                    }}
                     type="submit"
                     className=" cursor-pointer hover:scale-95 duration-300  flex w-full border border-black p-2 rounded-lg uppercase font-bold justify-between items-center ">
                     {' '}

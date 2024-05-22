@@ -20,7 +20,7 @@ function Nav() {
         <nav className="container m-auto  lg:gap-2  hidden md:flex	  justify-between  items-center py-5 px-2">
             <Link
                 href={'/Home'}
-                className="logo text-3xl block font-bold font-header ">
+                className="logo text-3xl block font-bold font-header hover:scale-95 duration-300 ">
                 Volt
             </Link>
             <ul className="flex whitespace-nowrap     gap-5">

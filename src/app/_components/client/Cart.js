@@ -1,33 +1,51 @@
 import Button from '@/app/_components/client/Button'
 import CartProduct from '@/app/_components/client/CartProduct'
 import cloth from '@/app/_assets/cloth.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from '@/lib/axios'
+import PopUp from '../PopUp'
 
-function Cart({cart, total, changeTotal, changeCart}) {
+function Cart({ cart, total, changeTotal, changeCart }) {
     const router = useRouter()
+    const [placeLaoder, setPlaceLoader] = useState(false)
+    const [isOrderPlaced, setOrderPlaced] = useState(false)
     const handlePlaceOrder = async () => {
         try {
-            console.log('place')
-            await axios
-                .post(
-                    `api/order`,
-                )
-                .then(res => {
-                    console.log(res)
-                    router.push('/Home')
-                })
+            setPlaceLoader(true)
+            await axios.post(`api/order`).then(res => {
+                setOrderPlaced(true)
+                setPlaceLoader(false)
+            })
         } catch (err) {
             throw new Error(err)
         }
     }
-
+    useEffect(() => {
+        if (isOrderPlaced) {
+            setTimeout(() => {
+                router.push('/Home')
+            }, 3000)
+        }
+    }, [isOrderPlaced])
     return (
-        <div className="flex flex-col md:flex-row gap-7 p-4">
+        <div className="flex flex-col md:flex-row gap-7 p-4 w-full rounded-md">
+            {isOrderPlaced && (
+                <PopUp
+                    parentClass="rounded-md"
+                    childClass="flex justify-center items-center capitalize"
+                    text={'order placed succesfully!!'}>
+                    {' '}
+                </PopUp>
+            )}
             <div className="w-full md:w-[50%] p-3 rounded-xl border-2 border-solid border-main_gray">
-                {cart.map((i) => (
-                    <CartProduct productid = {i.product_id} quantity = {i.quantity} changeTotal={changeTotal} changeCart={changeCart} />
+                {cart.map(i => (
+                    <CartProduct
+                        productid={i.product_id}
+                        quantity={i.quantity}
+                        changeTotal={changeTotal}
+                        changeCart={changeCart}
+                    />
                 ))}
             </div>
             <div className=" w-full md:w-[40%] p-3 rounded-xl border-2 border-solid border-main_gray">
@@ -51,12 +69,24 @@ function Cart({cart, total, changeTotal, changeCart}) {
                 </div>
                 <div className=" my-5">
                     <Button
-                        title={'Place Order'}
-                        bg_color={'bg-black'}
+                        title={
+                            placeLaoder ? (
+                                <div className="w-6 h-6 border rounded-[50%]  border-white border-r-transparent animate-spin"></div>
+                            ) : (
+                                'Place Order '
+                            )
+                        }
+                        bg_color={'bg-black flex justify-center items-center  '}
                         pc_width={'w-full'}
                         mobile_width={'w-full'}
                         text_color={'text-white'}
-                        handleClick={handlePlaceOrder}
+                        handleClick={
+                            placeLaoder
+                                ? e => {
+                                      e.preventDefault()
+                                  }
+                                : handlePlaceOrder
+                        }
                     />
                 </div>
             </div>
