@@ -2,11 +2,11 @@
 import Image from 'next/image'
 import star from '@/app/_assets/star.png'
 function Feedback({ ...props }) {
-    let rating = props.rate
+    let rating = props.rating
     let finalRate = Math.floor(rating)
     let stars = Array(finalRate).fill(0)
     return (
-        <div className=" box-border w-full  border-2 border-solid border-main_gray bg-white rounded-2xl p-5">
+        <div className=" box-border w-[98%] min-h-[200px] mb-2  border-2 border-solid border-main_gray bg-white rounded-2xl p-5">
             <div className=" flex gap-2">
                 {stars.map((st, i) => (
                     <Image
@@ -22,7 +22,7 @@ function Feedback({ ...props }) {
                     {props.customerName}
                 </h5>
             </div>
-            <p className="font-plus text-gray-500">{props.feedback}</p>
+            <p className="font-plus text-gray-500">{props.comment}</p>
         </div>
     )
 }

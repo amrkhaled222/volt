@@ -52,7 +52,7 @@ export default function MobileNav() {
                 </div>
                 <h1
                     onClick={() => {
-                        router.push('/Home')
+                        router.push('/')
                     }}
                     className="  text-3xl font-bold hover:scale-95 duration-300 ">
                     {' '}
@@ -91,22 +91,22 @@ export default function MobileNav() {
                                 <Menu.Items className="  w-full left-0   focus:outline-none">
                                     <div className="py-1 capitalize flex flex-col gap-2 ">
                                         <Menu.Item className={`shadow-sm p-1`}>
-                                            <Link href="shop?category_id=1">
+                                            <Link href="/shop?category_id=1">
                                                 {'casual'}
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item className={`shadow-sm p-1`}>
-                                            <Link href="shop?category_id=2">
+                                            <Link href="/shop?category_id=2">
                                                 formal
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item className={` shadow-sm p-1`}>
-                                            <Link href="shop?category_id=3">
+                                            <Link href="/shop?category_id=3">
                                                 Gym
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item className={`shadow-sm p-1`}>
-                                            <Link href="shop?category_id=4">
+                                            <Link href="/shop?category_id=4">
                                                 party
                                             </Link>
                                         </Menu.Item>
@@ -117,10 +117,10 @@ export default function MobileNav() {
                     </li>
 
                     <li className=" hover:cursor-pointer shadow-sm p-1">
-                        <Link href="shop?latest=1">New Arrivals</Link>
+                        <Link href="/shop?latest=1">New Arrivals</Link>
                     </li>
                     <li className=" hover:cursor-pointer shadow-sm p-1">
-                        <Link href="shop?best_seller=1">best_seller</Link>
+                        <Link href="/shop?best_seller=1">best_seller</Link>
                     </li>
                 </ul>
                 <form

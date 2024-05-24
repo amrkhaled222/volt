@@ -39,7 +39,9 @@ function CartPage() {
 
                 <div
                     className={`relative min-h-[50vh] min-w[100%] ${
-                        !cart && 'flex items-center justify-center'
+                        cart.length == 0 || err == 404
+                            ? 'flex items-center justify-center'
+                            : ''
                     } `}>
                     {loader && (
                         <Loader
@@ -48,7 +50,7 @@ function CartPage() {
                     )}
 
                     {err == 401 && (
-                        <div className="w-full min-h-[40vh] p-4  flex items-center flex-col  justify-between">
+                        <div className="w-full min-h-[40vh] p-4  flex items-center flex-col  justify-between pt-12">
                             <p className=" text-center px-6 capitalize font-bold text-2xl">
                                 {' '}
                                 you should sign in to see your cart
@@ -84,10 +86,19 @@ function CartPage() {
                                     changeCart={setCart}
                                 />
                             ) : (
-                                <p className="font-semibold">
-                                    There is no items in your cart back to
-                                    shoping
-                                </p>
+                                <div className="flex justify-center items-center gap-10 flex-col">
+                                    <p className=" text-center px-6 capitalize font-bold text-2xl">
+                                        There is no items in your cart back to
+                                        shoping
+                                    </p>
+                                    <button
+                                        onClick={() => {
+                                            router.push('/shop')
+                                        }}
+                                        className="p-2 bg-black min-w-[200px] text-white rounded-lg duration-300 hover:scale-95 text-lg capitalize">
+                                        shop
+                                    </button>
+                                </div>
                             )}
                         </>
                     )}

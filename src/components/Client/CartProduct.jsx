@@ -76,9 +76,9 @@ function CartProduct({ productid, quantity, changeTotal, changeCart }) {
 
     return (
         <>
-            <div className="flex gap-3 flex-col sm:flex-row">
+            <div className="flex gap-3 relative flex-col sm:flex-row min-h-[150px]  ">
                 {loader ? (
-                    <Loader></Loader>
+                    <Loader childStyle="flex justify-center items-center  lg:!w-full"></Loader>
                 ) : (
                     <>
                         <div>

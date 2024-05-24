@@ -1,8 +1,20 @@
 import Button from '@/components/Client/Button'
-
-function WriteReview(cancelReview) {
+import { sendData } from '@/ApiFunctions/post'
+import Loader from '@/components/Loader'
+import { useEffect, useState } from 'react'
+function WriteReview({ cancelReview, productId }) {
+    const [review, setReview] = useState({
+        Name: '',
+        rating: 0,
+        feedback: '',
+        product_id: productId,
+    })
     return (
-        <form className="mt-4">
+        <form
+            className="mt-4"
+            onSubmit={e => {
+                e.preventDefault()
+            }}>
             <div className="  md:w-1/2 flex flex-col gap-3 mb-4 ">
                 <label htmlFor="name" className=" font-plusj font-bold text-xl">
                     Name :
@@ -56,12 +68,7 @@ function WriteReview(cancelReview) {
                     />
                 </div>
                 <div>
-                    <Button
-                        title={'Cancel'}
-                        text_color={'text-white'}
-                        bg_color={'bg-black'}
-                        handleClick={cancelReview}
-                    />
+                    <button onClick={cancelReview}> cancel</button>
                 </div>
             </div>
         </form>

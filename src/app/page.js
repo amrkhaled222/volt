@@ -39,7 +39,7 @@ function Home() {
     const fetchBestData = async () => {
         try {
             await axios.get(`api/product?best_seller=1`).then(res => {
-                setBest(res.data.products.data.slice(0, 4))
+                setBest(res.data.products.data.slice(0, 3))
             })
         } catch (err) {
             throw new Error(err)

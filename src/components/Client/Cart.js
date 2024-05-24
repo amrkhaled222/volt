@@ -54,7 +54,7 @@ function Cart({ cart, total = 0, changeTotal, changeCart }) {
                 ))}
             </div>
 
-            <div className=" w-full md:w-[40%] p-3 rounded-xl border-2 border-solid border-main_gray">
+            <div className=" w-full md:w-[40%] p-3 rounded-xl relative border-2 border-solid border-main_gray">
                 {!total && (
                     <Loader childStyle="flex justify-center items-center"></Loader>
                 )}

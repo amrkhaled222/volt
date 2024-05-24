@@ -11,6 +11,7 @@ function ItemPage(props) {
     const [youMightAlsoLike, setYouMight] = useState({})
 
     //function to get data for you might also like  section
+
     const youmightalsolike = async () => {
         try {
             await axios.get(`api/product`).then(res => {
@@ -50,7 +51,7 @@ function ItemPage(props) {
                 {Object.keys(product).length > 0 && <Item product={product} />}
             </div>
 
-            <Preview title="You might also like">
+            <Preview title="You might also like" path={'latest=1'}>
                 <div className="flex flex-wrap justify-center gap-4 mb-10 min-h-[40vh] w-full relative">
                     {Object.keys(youMightAlsoLike).length > 0 &&
                         youMightAlsoLike.map(product => (

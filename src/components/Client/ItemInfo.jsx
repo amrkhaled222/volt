@@ -1,43 +1,30 @@
+'use client'
 import Button from './Button'
 import Feedback from './Feedback'
 import arrowDown from '@/app/_assets/arrowDown.svg'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { feedbacks } from './feedbacks'
 import { sliderSettings } from './sliderSettings'
 import WriteReview from './WriteReview'
 import Image from 'next/image'
-function ItemInfo({ children, ...props }) {
+import { getReviews } from '@/ApiFunctions/get'
+import Loader from '../Loader'
+
+function ItemInfo({ children, itemId, productDetails, ...props }) {
     const [Display, setDisplay] = useState('rating')
-
-    function handleClick(param) {
-        if (param == 'rating') {
-            setDisplay('rating')
-        } else if (param == 'Details') {
-            setDisplay('Details')
-        } else if (param == 'FAQs') {
-            setDisplay('FAQs')
+    const [productReviews, setProductReviews] = useState([])
+    const [loader, setLoader] = useState(true)
+    useEffect(() => {
+        const getdata = async () => {
+            const reviewData = await (await getReviews(itemId)).data?.reviews
+            setProductReviews(reviewData)
+            setLoader(false)
         }
-    }
-
-    function handleWriteReviewClick() {
-        setDisplay('Write a review')
-    }
-
-    let liTitle
-
-    if (Display === 'rating') {
-        liTitle = 'All Reviews'
-    } else if (Display === 'Details') {
-        liTitle = 'Description'
-    } else if (Display === 'FAQs') {
-        liTitle = 'FAQs'
-    } else if (Display === 'Write a review') {
-        liTitle = 'Submit Your Review'
-    }
-
+        getdata()
+    }, [])
     const listButtonClass = `text-black font-bold`
 
     return (
@@ -48,27 +35,27 @@ function ItemInfo({ children, ...props }) {
                         <li className=" font-plusj  text-gray-500 hover:text-black">
                             <button
                                 className={
-                                    Display === 'Details' && listButtonClass
+                                    Display === 'Details' ? listButtonClass : ''
                                 }
-                                onClick={() => handleClick('Details')}>
+                                onClick={() => setDisplay('Details')}>
                                 Product Details
                             </button>
                         </li>
                         <li className=" font-plusj  text-gray-500  hover:text-black">
                             <button
                                 className={
-                                    Display === 'rating' && listButtonClass
+                                    Display === 'rating' ? listButtonClass : ''
                                 }
-                                onClick={() => handleClick('rating')}>
+                                onClick={() => setDisplay('rating')}>
                                 Rating & Reviews
                             </button>
                         </li>
                         <li className=" font-plusj  text-gray-500  hover:text-black">
                             <button
                                 className={
-                                    Display === 'FAQs' && listButtonClass
+                                    Display === 'FAQs' ? listButtonClass : ''
                                 }
-                                onClick={() => handleClick('FAQs')}>
+                                onClick={() => setDisplay('FAQs')}>
                                 FAQs
                             </button>
                         </li>
@@ -77,68 +64,115 @@ function ItemInfo({ children, ...props }) {
                     <div className="mt-4 flex justify-between">
                         <div className="flex sm:gap-2 items-center">
                             <p className="font-montserrat font-bold text-2xl">
-                                {liTitle}
+                                {Display}
                             </p>
                             {Display == 'rating' && (
                                 <p className=" font-plusj text-sm text-gray-500">
-                                    {`(${feedbacks.length})`}
+                                    {`(${productReviews.length})`}
                                 </p>
                             )}
                         </div>
-
-                        {Display === 'rating' && (
-                            <div className=" flex gap-2">
-                                <button className=" flex items-center gap-2 rounded-3xl px-2  border-2 border-solid font-plusj bg-main_gray">
-                                    <p>Latest</p>
-                                    <Image src={arrowDown} alt="" />
-                                </button>
-                                <Button
-                                    title="write a review"
-                                    text_color="text-white"
-                                    bg_color="bg-black"
-                                    handleClick={handleWriteReviewClick}
-                                />
-                            </div>
-                        )}
                     </div>
                 </div>
 
-                {Display == 'rating' && (
-                    <div className=" mt-7 ">
-                        <Slider
-                            {...sliderSettings}
-                            autoplay={true}
-                            autoplaySpeed={5000}
-                            arrows={false}
-                            rows={2}>
-                            {feedbacks.map(feedback => (
-                                <Feedback key={feedback.id} {...feedback} />
-                            ))}
-                        </Slider>
-                    </div>
-                )}
+                <div className=" mt-7 min-h-[30vh] w-full flex flex-col gap-4 relative">
+                    {loader ? (
+                        <Loader childStyle="flex justify-center items-center"></Loader>
+                    ) : (
+                        <>
+                            {Display === 'rating' && (
+                                <div className=" flex items-center justify-end mt-1">
+                                    <Button
+                                        title="Write a review"
+                                        text_color="text-white  p-3 "
+                                        bg_color="bg-black"
+                                        handleClick={() => {
+                                            setDisplay('Write a review')
+                                        }}
+                                    />
+                                </div>
+                            )}
+                            {Display == 'Details' && (
+                                <p className=" text-gray-500 text-lg font-plusj my-5">
+                                    {productDetails}
+                                </p>
+                            )}
 
-                {Display == 'Details' && (
-                    <p className=" text-gray-500 text-lg font-plusj my-5">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Soluta, nulla. Facilis ex quaerat qui consectetur.
-                        Obcaecati nostrum sunt qui soluta nesciunt praesentium,
-                        dolore aliquam reprehenderit, deleniti, adipisci fuga
-                        dolorum? Veniam.
-                    </p>
-                )}
+                            {Display == 'FAQs' && (
+                                <p className=" text-3xl text-center font-montserrat font-extrabold my-5">
+                                    This Section is under Devolpment
+                                </p>
+                            )}
 
-                {Display == 'FAQs' && (
-                    <p className=" text-3xl text-center font-montserrat font-extrabold my-5">
-                        This Section is under Devolpment
-                    </p>
-                )}
-
-                {Display === 'Write a review' && (
-                    <WriteReview cancelReview={() => handleClick('rating')} />
-                )}
+                            {Display === 'Write a review' && (
+                                <WriteReview
+                                    cancelReview={() => setDisplay('rating')}
+                                />
+                            )}
+                            {Display == 'rating' && (
+                                <>
+                                    {productReviews.length ? (
+                                        <>
+                                            <Slider
+                                                {...sliderSettings}
+                                                autoplay={true}
+                                                autoplaySpeed={5000}
+                                                arrows={false}
+                                                rows={2}>
+                                                {productReviews.map(
+                                                    feedback => (
+                                                        <Feedback
+                                                            key={feedback.id}
+                                                            {...feedback}
+                                                        />
+                                                    ),
+                                                )}
+                                            </Slider>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p className="text-3xl text-center font-montserrat font-extrabold my-5">
+                                                opps!! there is no reviews to
+                                                show{' '}
+                                            </p>{' '}
+                                            <p className="text-2xl text-center font-montserrat font-extrabold my-5">
+                                                be the first one and write now!!{' '}
+                                            </p>
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
         </section>
     )
 }
 export default ItemInfo
+
+// function handleClick(param) {
+//     if (param == 'rating') {
+//         setDisplay('rating')
+//     } else if (param == 'Details') {
+//         setDisplay('Details')
+//     } else if (param == 'FAQs') {
+//         setDisplay('FAQs')
+//     }
+// }
+
+// function handleWriteReviewClick() {
+//     setDisplay('Write a review')
+// }
+
+// let liTitle
+
+// if (Display === 'rating') {
+//     liTitle = 'All Reviews'
+// } else if (Display === 'Details') {
+//     liTitle = 'Description'
+// } else if (Display === 'FAQs') {
+//     liTitle = 'FAQs'
+// } else if (Display === 'Write a review') {
+//     liTitle = 'Submit Your Review'
+// }
