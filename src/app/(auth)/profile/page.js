@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import avatarIcon from '@/app/_assets/user.png'
 import Image from 'next/image'
 import rightArrowIcon from '@/app/_assets/arrow-right-bold 1.svg'
-import Dropzone from '@/app/_components/Dropzone'
+import Dropzone from '@/components/Dropzone'
 import { useRouter } from 'next/navigation'
-import { sendData } from '@/app/_components/function'
+import { sendData } from '@/ApiFunctions/post'
 import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 function Profile() {
@@ -25,12 +25,13 @@ function Profile() {
     const [isAuth, setIsAuth] = useState(false)
     let router = useRouter()
     const changePath = () => {
-        router.push('/Home')
+        router.push('/')
     }
 
-    if(user && !isAuth){
+    if (user && !isAuth) {
         setIsAuth(true)
     }
+
     //validate form and show propiate massege
     const handleFormdata = e => {
         const { name, value } = e.target
