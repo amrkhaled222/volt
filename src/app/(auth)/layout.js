@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
             <div className="font-sans text-gray-900 antialiased">
                 <AuthCard
                     logo={
-                        <Link href="/Home">
+                        <Link href="/">
                             <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
                         </Link>
                     }>
