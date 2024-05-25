@@ -1,15 +1,19 @@
 'use client'
+
 import Button from './Button'
 import Feedback from './Feedback'
 import arrowDown from '@/app/_assets/arrowDown.svg'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+
 import { useState, useEffect } from 'react'
+
 import { feedbacks } from './feedbacks'
 import { sliderSettings } from './sliderSettings'
 import WriteReview from './WriteReview'
 import Image from 'next/image'
+
 import { getReviews } from '@/ApiFunctions/get'
 import Loader from '../Loader'
 
@@ -25,6 +29,7 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
         }
         getdata()
     }, [])
+
     const listButtonClass = `text-black font-bold`
 
     return (
