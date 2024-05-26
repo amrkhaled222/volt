@@ -12,10 +12,11 @@ function Browse() {
                     </h2>
                     <div
                         className=" grid gap-5 grid-cols-1 md:grid-cols-3 grid-rows-4 md:grid-rows-2 justify-center"
+                        >
+                        <div className="hover:shadow-xl hover:cursor-pointer bg-white rounded-3xl p-9 h-[289px] bg-mobileCasual md-bg-casual bg-no-repeat bg-cover md:bg-fill bg-right md:col-start-1 md:col-end-2"
                         onClick={() => {
                             router.push('shop?category_id=1')
                         }}>
-                        <div className="hover:shadow-xl hover:cursor-pointer bg-white rounded-3xl p-9 h-[289px] bg-mobileCasual md-bg-casual bg-no-repeat bg-cover md:bg-fill bg-right md:col-start-1 md:col-end-2">
                             <h4 className=" uppercase font-plusj font-bold text-3xl">
                                 casual
                             </h4>
