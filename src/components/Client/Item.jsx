@@ -14,7 +14,6 @@ import removeIcon from '@/app/_assets/remove.png'
 import PopUp from '../PopUp'
 let cart = new Array()
 function Item({ product }) {
-    console.log(product)
     const [counter, setCounter] = useState(1)
     const { user } = useAuth()
     const [quantity, setQuantity] = useState(1)
@@ -31,7 +30,6 @@ function Item({ product }) {
     // }
 
     async function handleAddToCart() {
-        console.log('add')
         setaddLoader(true)
 
         if (user) {
@@ -41,7 +39,6 @@ function Item({ product }) {
                         quantity: quantity,
                     })
                     .then(res => {
-                        console.log(res)
                         setaddLoader(false)
                     })
             } catch (err) {
@@ -50,7 +47,6 @@ function Item({ product }) {
         } else {
             setaddLoader(false)
             setErr(401)
-            console.log(err)
         }
     }
 

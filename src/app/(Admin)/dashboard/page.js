@@ -26,7 +26,7 @@ export default function Dashboard() {
         getStats()
         getRecentOrder()
     }, [])
-    console.log(stats)
+
     return (
         <div className="flex p-4 flex-col gap-6 min-h-[90vh]  relative  ">
             {loader && (

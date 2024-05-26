@@ -30,13 +30,13 @@ function Filter() {
         <aside className=" md:w-[25%] xl:w-[20%] hidden md:block  rounded-xl border-2 border-solid border-main_gray p-3 ">
             <div className="flex justify-between">
                 <h4 className=" font-plusj font-bold">Filter</h4>
-                <button onClick={handleSettingsClick} className=" w-5 h-5">
-                    <Image
-                        src={settingsIcon}
-                        alt="setting"
-                        className={imageClasses}
-                    />
-                </button>
+                {/* <button onClick={handleSettingsClick} className=" w-5 h-5"> */}
+                {/* <Image
+                    src={settingsIcon}
+                    alt="setting"
+                    className={imageClasses + ' w-5 h-5'}
+                /> */}
+                {/* </button> */}
             </div>
 
             <hr className="h-1 bg-hrColor my-4" />

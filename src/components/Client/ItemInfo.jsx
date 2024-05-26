@@ -9,7 +9,6 @@ import 'slick-carousel/slick/slick-theme.css'
 
 import { useState, useEffect } from 'react'
 
-import { feedbacks } from './feedbacks'
 import { sliderSettings } from './sliderSettings'
 import WriteReview from './WriteReview'
 import Image from 'next/image'

@@ -2,6 +2,15 @@
 
 module.exports = {
     images: {
-        domains: ['loremflickr.com', 'localhost'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'loremflickr.com',
+            },
+            {
+                protocol: 'http',
+                hostname: 'localhost',
+            },
+        ],
     },
 }

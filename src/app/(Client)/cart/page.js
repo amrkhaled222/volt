@@ -86,7 +86,7 @@ function CartPage() {
                                     changeCart={setCart}
                                 />
                             ) : (
-                                <div className="flex justify-center items-center gap- flex-col">
+                                <div className="flex justify-center items-center gap-8 flex-col">
                                     <p className=" text-center px-6 capitalize font-bold text-2xl">
                                         There is no items in your cart back to
                                         shoping

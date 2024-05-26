@@ -75,12 +75,10 @@ function Profile() {
 
     useEffect(() => {
         if (isAuth && user?.has_contact) {
-            console.log(user)
             getuserdata()
         }
     }, [isAuth])
 
-    console.log(userData)
     let containerStyle = 'flex flex-col gap-3 '
     let labelStyle = 'text-xl font-medium'
     let inputStyle =

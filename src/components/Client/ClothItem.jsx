@@ -13,7 +13,7 @@ function ClothItem({ ...props }) {
     return (
         <Link
             href={`/product/${props.id}`}
-            className=" cursor-pointer shadow-sm rounded-lg p-4 hover:scale-95 duration-300"
+            className=" cursor-pointer shadow-sm rounded-lg p-4 hover:scale-95 duration-500"
             key={props.id}>
             <div className=" mb-3">
                 <Image

@@ -77,7 +77,7 @@ function CategoryPage(props) {
                     <Filter />
                     <div className=" lg:min-w-[80%] md:min-w-[75] w-full p-4 flex flex-col min-h-[80vh]">
                         <div className="flex justify-between mb-4  relative ">
-                            <h2 className=" capitalize font-plusj font-bold text-3xl">
+                            <h2 className=" cursor-default capitalize font-plusj font-bold text-3xl">
                                 {' '}
                                 {title}
                             </h2>

@@ -59,7 +59,7 @@ function ProductDetails(props) {
             [name]: value,
         }))
     }
-    console.log(formData.picture)
+
     //use router for cancel button
 
     let router = useRouter()

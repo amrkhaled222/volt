@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 function PathTitle() {
     let pathname = usePathname().split('/')
-    console.log(pathname)
+
     let dir = []
     for (let i = 1; i < pathname.length; i++) {
         dir[i - 1] = pathname[i].split(/(?=[A-Z])/).join(' ')

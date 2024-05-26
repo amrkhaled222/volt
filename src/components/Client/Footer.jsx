@@ -18,10 +18,10 @@ function Footer() {
                 <UpToDate />
                 <div className=" pt-36">
                     <div className="flex md:flex-row justify-between mb-11 md:gap-8S lg:gap-20 xl:gap-24 flex-col gap-9 ">
-                        <div className=" w-fit">
+                        <div className=" flex flex-col justify-evenly">
                             <Link
                                 href={'/'}
-                                className=" font-montserrat font-extrabold text-4xl mb-6">
+                                className=" font-montserrat  font-extrabold text-4xl mb-9">
                                 Volt
                             </Link>
                             <p className=" text-gray-500 text-sm md:w-64 w-full mb-6">

@@ -6,7 +6,7 @@ import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Page = () => {
     const { register } = useAuth({
@@ -18,11 +18,16 @@ const Page = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
-
+    const [errors, setErrors] = useState({})
+    const [loader, setLoader] = useState(false)
+    useEffect(() => {
+        if (Object.keys(errors).length > 0) {
+            setLoader(false)
+        }
+    }, [errors])
     const submitForm = event => {
         event.preventDefault()
-
+        setLoader(true)
         register({
             name,
             email,
@@ -112,7 +117,20 @@ const Page = () => {
                     Already registered?
                 </Link>
 
-                <Button className="ml-4">Register</Button>
+                <Button
+                    onClick={e => {
+                        if (loader) {
+                            e.preventDefault()
+                        }
+                    }}
+                    className="ml-3 min-w-[75px] flex justify-center items-center hover:scale-95 !duration-300    ">
+                    {' '}
+                    {loader ? (
+                        <span className="w-5 h-5 border border-b-transparent rounded-full animate-spin "></span>
+                    ) : (
+                        ' Register'
+                    )}
+                </Button>
             </div>
         </form>
     )

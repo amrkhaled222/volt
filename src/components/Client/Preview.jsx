@@ -5,7 +5,7 @@ function Preview({ title, children, path }) {
     return (
         <section className=" my-20">
             <div className="container m-auto px-4 max-w-7xl ">
-                <h2 className=" font-montserrat font-extrabold uppercase my-12 text-center text-3xl">
+                <h2 className=" cursor-default font-montserrat font-extrabold uppercase my-12 text-center text-3xl">
                     {title}
                 </h2>
 

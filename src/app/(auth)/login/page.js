@@ -21,20 +21,24 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
     const [status, setStatus] = useState(null)
-
+    const [loader, setLoader] = useState(false)
     useEffect(() => {
         if (router.reset?.length > 0 && errors.length === 0) {
             setStatus(atob(router.reset))
         } else {
             setStatus(null)
         }
-    })
+
+        if (Object.keys(errors).length > 0) {
+            setLoader(false)
+        }
+    }, [router.reset, errors])
 
     const submitForm = async event => {
         event.preventDefault()
-
+        setLoader(true)
         login({
             email,
             password,
@@ -110,7 +114,20 @@ const Login = () => {
                         Forgot your password?
                     </Link>
 
-                    <Button className="ml-3">Login</Button>
+                    <Button
+                        onClick={e => {
+                            if (loader) {
+                                e.preventDefault()
+                            }
+                        }}
+                        className="ml-3 min-w-[75px] flex justify-center items-center hover:scale-95 !duration-300    ">
+                        {' '}
+                        {loader ? (
+                            <span className="w-5 h-5 border border-b-transparent rounded-full animate-spin "></span>
+                        ) : (
+                            ' Login'
+                        )}
+                    </Button>
                 </div>
             </form>
         </>
