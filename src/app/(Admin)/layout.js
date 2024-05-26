@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
                         <MobileNav></MobileNav>
                     </div>
 
-                    <div className="flex gap-4 items-center   ">
+                    <div className="flex gap-4 items-center">
                         <button className="cursor-pointer">
                             <Image
                                 alt="notification"
@@ -104,7 +104,7 @@ export default function RootLayout({ children }) {
                                 <button
                                     className="flex items-center  font-medium justify-between p-1 hover:scale-95 duration-300"
                                     onClick={() => {
-                                        router.push('/Home ')
+                                        router.push('/ ')
                                     }}>
                                     store
                                     <Image
@@ -117,7 +117,7 @@ export default function RootLayout({ children }) {
                                     onClick={() => {
                                         user.logout()
                                     }}>
-                                    log out{' '}
+                                    log out
                                     <Image
                                         className="w-4 h-4"
                                         src={logOutIcon}
