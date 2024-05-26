@@ -18,8 +18,8 @@ function Feedback({ ...props }) {
                 ))}
             </div>
             <div className=" flex gap-3">
-                <h5 className=" font-plusj font-bold text-xl my-2">
-                    {props.customerName}
+                <h5 className=" font-plusj font-bold text-xl my-2 capitalize">
+                    {props.customer_name}
                 </h5>
             </div>
             <p className="font-plus text-gray-500">{props.comment}</p>

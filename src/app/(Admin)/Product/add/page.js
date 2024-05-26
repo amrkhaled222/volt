@@ -37,7 +37,7 @@ function ProductDetails(props) {
     // redirect User
 
     const redirectUser = () => {
-        router.push('/allProduct')
+        router.push('/Product')
     }
 
     //remove uploaded Image

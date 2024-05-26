@@ -104,7 +104,7 @@ export default function RootLayout({ children }) {
                                 <button
                                     className="flex items-center  font-medium justify-between p-1 hover:scale-95 duration-300"
                                     onClick={() => {
-                                        router.push('/ ')
+                                        router.push('/')
                                     }}>
                                     store
                                     <Image
