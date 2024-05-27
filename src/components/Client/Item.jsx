@@ -85,9 +85,10 @@ function Item({ product }) {
                         <div className=" h-full order-1 md:order-2  ">
                             <Image
                                 src={product.picture}
+                                priority={true}
                                 height={500}
                                 width={350}
-                                alt=""
+                                alt="product image"
                                 className="md:max-h-[350px] md:max-w-[350px] w-full  rounded-md"
                             />
                         </div>
@@ -126,7 +127,7 @@ function Item({ product }) {
                                 <button className="font-bold">
                                     <Image
                                         src={Minus}
-                                        alt=""
+                                        alt="minus"
                                         onClick={handleMinus}
                                     />
                                 </button>
@@ -136,7 +137,7 @@ function Item({ product }) {
                                 <button
                                     className="font-bold"
                                     onClick={handleAdd}>
-                                    <Image src={Plus} alt="" />
+                                    <Image src={Plus} alt="plus" />
                                 </button>
                             </div>
                             <div className="w-[60%]">

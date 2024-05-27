@@ -42,7 +42,7 @@ function ItemPage(props) {
 
     return (
         <>
-            <div className="relative min-h-[40vh]">
+            <div className="relative md:min-h-[80vh] min-h-[100vh]">
                 {Object.keys(product).length == 0 && (
                     <Loader
                         style="bg-transparent"

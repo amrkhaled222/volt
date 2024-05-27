@@ -66,16 +66,28 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
                     </ul>
                     <hr className="h-1 bg-hrColor mt-4" />
                     <div className="mt-4 flex justify-between">
-                        <div className="flex sm:gap-2 items-center">
+                        <div className="flex gap-2 items-center">
                             <p className="font-montserrat font-bold text-2xl">
                                 {Display}
                             </p>
+
                             {Display == 'rating' && (
                                 <p className=" font-plusj text-sm text-gray-500">
                                     {`(${productReviews.length})`}
                                 </p>
                             )}
                         </div>
+
+                        {Display == 'rating' && (
+                            <Button
+                                title="Write review"
+                                text_color="text-white capitalize hover:scale-95 duration-300 border-none  px-6 py-2 block text-sm font-semibold "
+                                bg_color="bg-black"
+                                handleClick={() => {
+                                    setDisplay('Write a review')
+                                }}
+                            />
+                        )}
                     </div>
                 </div>
 
@@ -85,16 +97,7 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
                     ) : (
                         <>
                             {Display === 'rating' && (
-                                <div className=" flex items-center justify-end mt-1">
-                                    <Button
-                                        title="Write a review"
-                                        text_color="text-white  p-3 "
-                                        bg_color="bg-black"
-                                        handleClick={() => {
-                                            setDisplay('Write a review')
-                                        }}
-                                    />
-                                </div>
+                                <div className=" flex items-center justify-end mt-1"></div>
                             )}
                             {Display == 'Details' && (
                                 <p className=" text-gray-500 text-lg font-plusj my-5">
@@ -135,11 +138,11 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
                                         </>
                                     ) : (
                                         <>
-                                            <p className="text-3xl text-center font-montserrat font-extrabold my-5">
+                                            <p className="text-3xl text-center capitalize font-plusj font-bold my-5">
                                                 opps!! there is no reviews to
                                                 show{' '}
                                             </p>{' '}
-                                            <p className="text-2xl text-center font-montserrat font-extrabold my-5">
+                                            <p className="text-2xl text-center font-montserrat font-bold my-5">
                                                 be the first one and write now!!{' '}
                                             </p>
                                         </>
