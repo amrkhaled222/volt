@@ -19,6 +19,7 @@ import Loader from '../Loader'
 function ItemInfo({ children, itemId, productDetails, ...props }) {
     const [Display, setDisplay] = useState('rating')
     const [productReviews, setProductReviews] = useState([])
+    const [addReview, setAddReview] = useState(0)
     const [loader, setLoader] = useState(true)
     useEffect(() => {
         const getdata = async () => {
@@ -27,7 +28,7 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
             setLoader(false)
         }
         getdata()
-    }, [])
+    }, [addReview])
 
     const listButtonClass = `text-black font-bold`
 
@@ -113,7 +114,10 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
 
                             {Display === 'Write a review' && (
                                 <WriteReview
+                                    productId={itemId}
                                     cancelReview={() => setDisplay('rating')}
+                                    handleAdd = {setAddReview}
+                                    display = {setDisplay}
                                 />
                             )}
                             {Display == 'rating' && (
@@ -125,7 +129,7 @@ function ItemInfo({ children, itemId, productDetails, ...props }) {
                                                 autoplay={true}
                                                 autoplaySpeed={5000}
                                                 arrows={false}
-                                                rows={2}>
+                                                rows={1}>
                                                 {productReviews.map(
                                                     feedback => (
                                                         <Feedback
