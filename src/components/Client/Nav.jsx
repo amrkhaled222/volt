@@ -131,14 +131,14 @@ function Nav() {
                     placeholder="Search for products..."></input>
             </form>
 
-            <div className="flex gap-2 md:gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
                 <Image
                     onClick={() => {
                         router.push('/cart')
                     }}
                     alt="cartImage"
                     src={cartImg}
-                    className=" w-5 hover:cursor-pointer"></Image>
+                    className="w-5 h-5 hover:cursor-pointer"></Image>
                 <UserMenu></UserMenu>
             </div>
         </nav>
