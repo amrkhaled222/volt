@@ -12,6 +12,7 @@ const updateData = async (id, setloader, setUpdated, formData) => {
         throw new Error(err)
     }
 }
+
 //update order state
 const updateOrderData = async (id, state, setLoader) => {
     setLoader(true)
@@ -24,4 +25,17 @@ const updateOrderData = async (id, state, setLoader) => {
             throw new err()
         })
 }
-export { updateData, updateOrderData }
+const updateContactData = async (id, data, setLoader, setUpdated) => {
+    setLoader(true)
+    axios
+        .put(`api/user/contact/${id}`, data)
+        .then(() => {
+            setLoader(false)
+            setUpdated(true)
+        })
+        .catch(err => {
+            throw new err()
+        })
+}
+
+export { updateData, updateOrderData, updateContactData }

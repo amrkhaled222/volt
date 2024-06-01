@@ -14,20 +14,10 @@ import removeIcon from '@/app/_assets/remove.png'
 import PopUp from '../PopUp'
 let cart = new Array()
 function Item({ product }) {
-    const [counter, setCounter] = useState(1)
     const { user } = useAuth()
     const [quantity, setQuantity] = useState(1)
-    const [Active, setActive] = useState('Small')
-    const [addtoCart, setAddToCart] = useState()
     const [err, setErr] = useState(0)
     const [addLoader, setaddLoader] = useState(false)
-
-    // let rating = product.rate
-    // let finalRate = Math.floor(rating)
-    // let stars = false
-    // if (rating) {
-    //     stars = new Array(finalRate).fill(0)
-    // }
 
     async function handleAddToCart() {
         setaddLoader(true)
@@ -99,17 +89,6 @@ function Item({ product }) {
                             {product.title}
                         </h3>
                         <div className=" flex gap-5 my-5">
-                            {/* <div className=" flex gap-2">
-                                {stars &&
-                                    stars.map((st, i) => (
-                                        <Image
-                                            src={star}
-                                            key={i}
-                                            className="h-4 w-4 "
-                                            alt="Customer Rating"
-                                        />
-                                    ))}
-                            </div> */}
                             <p className=" font-plusj ">{product.rating}</p>
                         </div>
                         <div className="my-5">

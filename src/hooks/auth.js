@@ -3,7 +3,11 @@ import axios from '@/lib/axios'
 import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+export const useAuth = ({
+    middleware,
+    redirectIfAuthenticated,
+    redirectIfNotAuthenticated,
+} = {}) => {
     const router = useRouter()
     const params = useParams()
 
@@ -102,6 +106,16 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
+        if (middleware === 'auth' && redirectIfNotAuthenticated && !user) {
+            router.push(redirectIfNotAuthenticated)
+        }
+        if (
+            middleware === 'Admin' &&
+            redirectIfNotAuthenticated &&
+            !user?.is_admin
+        ) {
+            router.push(redirectIfNotAuthenticated)
+        }
         if (
             window.location.pathname === '/verify-email' &&
             user?.email_verified_at

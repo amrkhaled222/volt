@@ -30,9 +30,7 @@ function Table({ header, data }) {
                     </thead>
                     <tbody>
                         {Object.keys(data).map((e, i) => {
-                            return (
-                                <Row {...data[e]} key={data[e].orderId}></Row>
-                            )
+                            return <Row {...data[e]} key={data.id}></Row>
                         })}
                     </tbody>
                 </table>

@@ -9,22 +9,20 @@ import MobileNav from '@/components/Admin/MobileNav'
 import { useRouter } from 'next/navigation'
 import logOutIcon from '@/app/_assets/logOut.png'
 import PathTitle from '@/components/Admin/PathTitle'
-import { useLayoutEffect } from 'react'
-import { redirect } from 'next/navigation'
+
 import { useAuth } from '@/hooks/auth'
 import StoreIcon from '@/app/_assets/grocery-store.png'
 export default function RootLayout({ children }) {
     //get user data
-    const user = useAuth()
+    const user = useAuth({
+        middleware: 'Admin',
+        redirectIfNotAuthenticated: '/',
+    })
 
     //use route
     let router = useRouter()
     //redirect unauthorized user
-    useLayoutEffect(() => {
-        if (!user?.user?.is_admin) {
-            redirect('/')
-        }
-    }, [])
+
     const [AdminActive, toogleAdmin] = useState(false)
 
     const handleAdminButton = () => {

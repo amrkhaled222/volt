@@ -39,7 +39,7 @@ export default function Dashboard() {
                 <>
                     <div className="flex gap-3 justify-evenly flex-wrap">
                         {stats.map((s, i) => {
-                            return <Stats stat={s} key={i}></Stats>
+                            return <Stats stat={s} key={s[0]}></Stats>
                         })}
                     </div>
                     <Table
